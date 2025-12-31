@@ -85,8 +85,17 @@ This plan outlines the steps to redesign and enhance the Delivery Application to
 - [x] Create `ReferralPage` and code sharing UI
 - [x] Implement `HomeSkeleton` for better loading UX
 - [x] Create `OrderSuccessPage` with Lottie/Vector illustration placeholder
-- [ ] Implement "Add to Cart" flying animation placeholder
-- [ ] Final polishing of Hero animations and page transitions
+- [x] Implement "Add to Cart" flying animation placeholder
+- [x] Final polishing of Hero animations and page transitions
+
+### Phase 9: Backend Sync & QA (Commits 141-160+) [DONE]
+- [x] Connect "Favorites" to Firestore (Persist user favorites)
+- [x] Sync "Saved Addresses" with Firestore
+- [x] Implement Local Notifications for order status updates
+- [x] Add Search functionality to filter menu items on Home page
+- [x] Integrate Image Caching for better performance (cached_network_image)
+- [x] Add real-time order status tracking logic
+- [x] Final Bug Scrub & Performance Optimization
 
 ## Commit Strategy
 - Every component change gets its own commit.

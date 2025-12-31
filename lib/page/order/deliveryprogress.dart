@@ -6,6 +6,7 @@ import 'package:thydelivery_mobileapp/components/myreciet.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
+import 'dart:async';
 
 class Deliveryprogress extends StatefulWidget {
   const Deliveryprogress({super.key});
@@ -13,18 +14,34 @@ class Deliveryprogress extends StatefulWidget {
   @override
   State<Deliveryprogress> createState() => _DeliveryprogressState();
 }
-
 class _DeliveryprogressState extends State<Deliveryprogress> {
   final FirestoreService db = FirestoreService();
+  OrderStatus _currentStatus = OrderStatus.placed;
 
   @override
   void initState() {
     super.initState();
+    _startStatusSimulation();
     // Save orders to firestore
     WidgetsBinding.instance.addPostFrameCallback((_) {
       String orders = context.read<Restaurant>().userCartReciet();
       String currentAddress = context.read<Restaurant>().getDeliveryAddress;
       db.saveOrdersToFireStore(orders, currentAddress);
+    });
+  }
+
+  void _startStatusSimulation() {
+    Timer(const Duration(seconds: 5), () {
+      if (mounted) setState(() => _currentStatus = OrderStatus.confirmed);
+    });
+    Timer(const Duration(seconds: 15), () {
+      if (mounted) setState(() => _currentStatus = OrderStatus.preparing);
+    });
+    Timer(const Duration(seconds: 30), () {
+      if (mounted) setState(() => _currentStatus = OrderStatus.onTheWay);
+    });
+    Timer(const Duration(seconds: 45), () {
+      if (mounted) setState(() => _currentStatus = OrderStatus.delivered);
     });
   }
 
@@ -58,7 +75,7 @@ class _DeliveryprogressState extends State<Deliveryprogress> {
               style: AppTextStyles.h3.copyWith(fontSize: 18),
             ),
             const SizedBox(height: 16),
-            const DeliveryStepper(currentStatus: OrderStatus.preparing),
+            DeliveryStepper(currentStatus: _currentStatus),
 
             const SizedBox(height: 30),
 
