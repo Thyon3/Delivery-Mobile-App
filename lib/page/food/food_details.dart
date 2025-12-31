@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:thydelivery_mobileapp/theme/app_snackbars.dart';
 
 import 'package:thydelivery_mobileapp/page/cart/cart.dart';
+import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 
 class FoodDetails extends StatefulWidget {
   final Food food;
@@ -153,12 +154,23 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white.withOpacity(0.9),
-                      child: IconButton(
-                        icon: Icon(Icons.favorite_border_rounded, color: Theme.of(context).colorScheme.primary),
-                        onPressed: () {},
-                      ),
+                    child: Consumer<Restaurant>(
+                      builder: (context, restaurant, child) {
+                        final isFavorite = restaurant.isFavorite(widget.food);
+                        return CircleAvatar(
+                          backgroundColor: Colors.white.withOpacity(0.9),
+                          child: IconButton(
+                            icon: Icon(
+                              isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            onPressed: () {
+                              restaurant.toggleFavorite(widget.food);
+                              FirestoreService().toggleFavoriteInFirestore(widget.food.name, !isFavorite);
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

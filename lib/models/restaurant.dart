@@ -6,6 +6,8 @@ import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 import 'package:thydelivery_mobileapp/models/app_user.dart';
+import 'package:thydelivery_mobileapp/models/address.dart';
+import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 
 class Restaurant with ChangeNotifier {
   final List<Food> menu = [
@@ -241,6 +243,64 @@ class Restaurant with ChangeNotifier {
 
   List<AppUser> get getUsers {
     return _users;
+  }
+
+  // Favorites
+  final List<Food> _favorites = [];
+  List<Food> get favorites => _favorites;
+
+  bool isFavorite(Food food) {
+    return _favorites.any((f) => f.name == food.name);
+  }
+
+  void toggleFavorite(Food food) {
+    final index = _favorites.indexWhere((f) => f.name == food.name);
+    if (index != -1) {
+      _favorites.removeAt(index);
+    } else {
+      _favorites.add(food);
+    }
+    notifyListeners();
+  }
+
+  void setFavorites(List<String> favoriteNames) {
+    _favorites.clear();
+    for (var name in favoriteNames) {
+      final food = menu.firstWhereOrNull((f) => f.name == name);
+      if (food != null) {
+        _favorites.add(food);
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> loadFavorites() async {
+    final names = await FirestoreService().getFavoritesFromFirestore();
+    setFavorites(names);
+  }
+
+  // Saved Addresses
+  List<Address> _savedAddresses = [
+    Address(title: 'Home', address: '123 Maple Street, New York, NY 10001', icon: 'home'),
+    Address(title: 'Work', address: '456 Broadway, Suite 200, New York, NY 10013', icon: 'work'),
+  ];
+  List<Address> get savedAddresses => _savedAddresses;
+
+  void addAddress(Address address) {
+    _savedAddresses.add(address);
+    notifyListeners();
+  }
+
+  void setAddresses(List<Address> addresses) {
+    _savedAddresses = addresses;
+    notifyListeners();
+  }
+
+  Future<void> loadAddresses() async {
+    final addresses = await FirestoreService().getAddressesFromFirestore();
+    if (addresses.isNotEmpty) {
+      setAddresses(addresses);
+    }
   }
 
   //operators

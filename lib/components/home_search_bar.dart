@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HomeSearchBar extends StatelessWidget {
-  const HomeSearchBar({super.key});
+  final Function(String)? onChanged;
+  final TextEditingController? controller;
+
+  const HomeSearchBar({
+    super.key,
+    this.onChanged,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +38,8 @@ class HomeSearchBar extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: TextField(
+              controller: controller,
+              onChanged: onChanged,
               decoration: InputDecoration(
                 hintText: 'Search for food, restaurants...',
                 hintStyle: TextStyle(

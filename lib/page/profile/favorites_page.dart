@@ -23,8 +23,7 @@ class FavoritesPage extends StatelessWidget {
       ),
       body: Consumer<Restaurant>(
         builder: (context, restaurant, child) {
-          // Mocking favorites by taking first 4 items
-          final favoriteItems = restaurant.menu.take(4).toList();
+          final favoriteItems = restaurant.favorites;
 
           if (favoriteItems.isEmpty) {
             return Center(

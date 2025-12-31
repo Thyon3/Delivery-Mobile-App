@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/address_tile.dart';
+import 'package:thydelivery_mobileapp/models/restaurant.dart';
+import 'package:thydelivery_mobileapp/models/address.dart';
+import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class SavedAddressesPage extends StatefulWidget {
@@ -12,23 +16,58 @@ class SavedAddressesPage extends StatefulWidget {
 class _SavedAddressesPageState extends State<SavedAddressesPage> {
   int _selectedIndex = 0;
 
-  final List<Map<String, dynamic>> _addresses = [
-    {
-      'title': 'Home',
-      'address': '123 Maple Street, New York, NY 10001',
-      'icon': Icons.home_rounded,
-    },
-    {
-      'title': 'Work',
-      'address': '456 Broadway, Suite 200, New York, NY 10013',
-      'icon': Icons.work_rounded,
-    },
-    {
-      'title': 'Gym',
-      'address': '789 Fitness Way, Brooklyn, NY 11201',
-      'icon': Icons.fitness_center_rounded,
-    },
-  ];
+  void _showAddAddressDialog() {
+    final titleController = TextEditingController();
+    final addressController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Add New Address', style: AppTextStyles.h3),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(labelText: 'Title (e.g. Home, Work)'),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: addressController,
+              decoration: const InputDecoration(labelText: 'Full Address'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          ElevatedButton(
+            onPressed: () {
+              if (titleController.text.isNotEmpty && addressController.text.isNotEmpty) {
+                final newAddress = Address(
+                  title: titleController.text,
+                  address: addressController.text,
+                  icon: 'location_on',
+                );
+                Provider.of<Restaurant>(context, listen: false).addAddress(newAddress);
+                FirestoreService().saveAddressToFirestore(newAddress);
+                Navigator.pop(context);
+              }
+            },
+            child: const Text('Add'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  IconData _getIconData(String iconName) {
+    switch (iconName) {
+      case 'home': return Icons.home_rounded;
+      case 'work': return Icons.work_rounded;
+      case 'fitness': return Icons.fitness_center_rounded;
+      default: return Icons.location_on_rounded;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,25 +82,29 @@ class _SavedAddressesPageState extends State<SavedAddressesPage> {
         elevation: 0,
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            ...Iterable.generate(_addresses.length).map((index) {
-              final item = _addresses[index];
-              return AddressTile(
-                title: item['title'],
-                address: item['address'],
-                isSelected: _selectedIndex == index,
-                icon: item['icon'],
-                onTap: () => setState(() => _selectedIndex = index),
-              );
-            }),
-            const SizedBox(height: 20),
-            
-            // Add New Address Button
-            OutlinedButton(
-              onPressed: () {},
+      body: Consumer<Restaurant>(
+        builder: (context, restaurant, child) {
+          final addresses = restaurant.savedAddresses;
+          
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                ...Iterable.generate(addresses.length).map((index) {
+                  final item = addresses[index];
+                  return AddressTile(
+                    title: item.title,
+                    address: item.address,
+                    isSelected: _selectedIndex == index,
+                    icon: _getIconData(item.icon),
+                    onTap: () => setState(() => _selectedIndex = index),
+                  );
+                }),
+                const SizedBox(height: 20),
+                
+                // Add New Address Button
+                OutlinedButton(
+                  onPressed: _showAddAddressDialog,
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 60),
                 shape: RoundedRectangleBorder(
@@ -87,8 +130,10 @@ class _SavedAddressesPageState extends State<SavedAddressesPage> {
                 ],
               ),
             ),
-          ],
-        ),
+              ],
+            ),
+          );
+        },
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(

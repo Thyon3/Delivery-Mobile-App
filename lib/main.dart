@@ -6,9 +6,12 @@ import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/services/auth/auth_gate.dart';
 import 'package:thydelivery_mobileapp/theme/theme_provider.dart';
 
+import 'package:thydelivery_mobileapp/services/notifications/notification_service.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await NotificationService.initialize();
   runApp(
     MultiProvider(
       providers: [

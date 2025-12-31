@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:thydelivery_mobileapp/models/address.dart';
 
 class FirestoreService {
   // get the collection
@@ -29,10 +31,66 @@ class FirestoreService {
     String email,
     String phoneNumber,
   ) async {
-    await await users.add({
-      'Name': name,
-      'Email': email,
-      'Phone Number': phoneNumber,
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      await users.doc(currentUser.uid).set({
+        'Name': name,
+        'Email': email,
+        'Phone Number': phoneNumber,
+      }, SetOptions(merge: true));
+    }
+  }
+
+  // Favorites logic
+  Future<void> toggleFavoriteInFirestore(String foodName, bool isFavorite) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) return;
+
+    final userDoc = users.doc(currentUser.uid);
+    if (isFavorite) {
+      await userDoc.update({
+        'favoriteFoodNames': FieldValue.arrayUnion([foodName])
+      });
+    } else {
+      await userDoc.update({
+        'favoriteFoodNames': FieldValue.arrayRemove([foodName])
+      });
+    }
+  }
+
+  Future<List<String>> getFavoritesFromFirestore() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) return [];
+
+    final snapshot = await users.doc(currentUser.uid).get();
+    if (snapshot.exists && snapshot.data() != null) {
+      final data = snapshot.data() as Map<String, dynamic>;
+      return List<String>.from(data['favoriteFoodNames'] ?? []);
+    }
+    return [];
+  }
+
+  // Address logic
+  Future<void> saveAddressToFirestore(Address address) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) return;
+
+    final userDoc = users.doc(currentUser.uid);
+    await userDoc.update({
+      'savedAddresses': FieldValue.arrayUnion([address.toMap()])
     });
+  }
+
+  Future<List<Address>> getAddressesFromFirestore() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) return [];
+
+    final snapshot = await users.doc(currentUser.uid).get();
+    if (snapshot.exists && snapshot.data() != null) {
+      final data = snapshot.data() as Map<String, dynamic>;
+      final List<dynamic> addressMaps = data['savedAddresses'] ?? [];
+      return addressMaps.map((map) => Address.fromMap(Map<String, dynamic>.from(map))).toList();
+    }
+    return [];
   }
 }

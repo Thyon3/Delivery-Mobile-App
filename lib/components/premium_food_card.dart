@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:thydelivery_mobileapp/components/app_image.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
+import 'package:thydelivery_mobileapp/models/restaurant.dart';
+import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class PremiumFoodCard extends StatelessWidget {
@@ -37,30 +41,41 @@ class PremiumFoodCard extends StatelessWidget {
             Expanded(
               child: Hero(
                 tag: 'food_${food.name}',
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                    image: DecorationImage(
-                      image: AssetImage(food.imagePath),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                   child: Stack(
                     children: [
+                      AppImage(
+                        imagePath: food.imagePath,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
                       Positioned(
                         top: 12,
                         right: 12,
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Icon(
-                            Icons.favorite_border_rounded,
-                            size: 18,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                        child: Consumer<Restaurant>(
+                          builder: (context, restaurant, child) {
+                            final isFavorite = restaurant.isFavorite(food);
+                            return GestureDetector(
+                              onTap: () {
+                                restaurant.toggleFavorite(food);
+                                FirestoreService().toggleFavoriteInFirestore(food.name, !isFavorite);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(6),
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                                  size: 18,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],

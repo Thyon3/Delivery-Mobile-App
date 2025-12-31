@@ -28,11 +28,34 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Category _selectedCategory = Category.burger;
   bool _isLoading = true;
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
     _simulateLoading();
+    // Load data from Firestore
+    final restaurant = Provider.of<Restaurant>(context, listen: false);
+    restaurant.loadFavorites();
+    restaurant.loadAddresses();
+
+    _searchController.addListener(() {
+      setState(() {
+        _searchQuery = _searchController.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  List<Food> _filterMenuBySearch(List<Food> menu) {
+    if (_searchQuery.isEmpty) return menu;
+    return menu.where((food) => food.name.toLowerCase().contains(_searchQuery.toLowerCase())).toList();
   }
 
   Future<void> _simulateLoading() async {
@@ -55,13 +78,16 @@ class _HomePageState extends State<HomePage> {
       drawer: const MyDrawer(),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          const CustomSliverAppBar(),
+          CustomSliverAppBar(
+            searchController: _searchController,
+          ),
         ],
         body: _isLoading 
           ? const HomeSkeleton()
           : Consumer<Restaurant>(
               builder: (context, restaurant, child) {
-            final filteredMenu = _filterMenuByCategory(_selectedCategory, restaurant.menu);
+            final searchedMenu = _filterMenuBySearch(restaurant.menu);
+            final filteredMenu = _filterMenuByCategory(_selectedCategory, searchedMenu);
             
             return SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 20),

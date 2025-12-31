@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thydelivery_mobileapp/components/app_image.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:thydelivery_mobileapp/page/food/food_details.dart';
 
@@ -39,8 +40,8 @@ class FoodTile extends StatelessWidget {
               tag: 'food_${food.name}',
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.asset(
-                  food.imagePath,
+                child: AppImage(
+                  imagePath: food.imagePath,
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,

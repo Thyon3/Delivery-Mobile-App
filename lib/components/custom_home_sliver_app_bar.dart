@@ -3,7 +3,14 @@ import 'package:thydelivery_mobileapp/components/home_search_bar.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
-  const CustomSliverAppBar({super.key});
+  final Function(String)? onSearchChanged;
+  final TextEditingController? searchController;
+
+  const CustomSliverAppBar({
+    super.key,
+    this.onSearchChanged,
+    this.searchController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +55,12 @@ class CustomSliverAppBar extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
           padding: const EdgeInsets.fromLTRB(16, 120, 16, 0),
-          child: const Column(
+          child: Column(
             children: [
-              HomeSearchBar(),
+              HomeSearchBar(
+                onChanged: onSearchChanged,
+                controller: searchController,
+              ),
             ],
           ),
         ),
