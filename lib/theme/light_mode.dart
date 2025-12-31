@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightMode = ThemeData(
   colorScheme: ColorScheme.light(
@@ -14,4 +15,37 @@ ThemeData lightMode = ThemeData(
   ),
   scaffoldBackgroundColor: Colors.white,
   useMaterial3: true,
+  textTheme: GoogleFonts.outfitTextTheme().copyWith(
+    displayLarge: GoogleFonts.outfit(fontWeight: FontWeight.bold),
+    displayMedium: GoogleFonts.outfit(fontWeight: FontWeight.bold),
+    bodyLarge: GoogleFonts.poppins(),
+    bodyMedium: GoogleFonts.poppins(),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: const Color(0xFFFF7043),
+      foregroundColor: Colors.white,
+      minimumSize: const Offset(double.infinity, 56),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      elevation: 0,
+    ),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: Colors.grey.shade100,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide.none,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide.none,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: const BorderSide(color: Color(0xFFFF7043), width: 2),
+    ),
+  ),
 );

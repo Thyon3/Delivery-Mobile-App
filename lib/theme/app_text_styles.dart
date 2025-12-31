@@ -48,4 +48,16 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     color: Colors.grey,
   );
+
+  static TextStyle price = GoogleFonts.outfit(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: const Color(0xFF2E7D32),
+  );
+
+  static TextStyle tag = GoogleFonts.poppins(
+    fontSize: 10,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5,
+  );
 }

@@ -5,6 +5,7 @@ class MyTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final IconData? prefixIcon;
+  final String? errorText;
 
   const MyTextField({
     super.key,
@@ -12,37 +13,39 @@ class MyTextField extends StatelessWidget {
     required this.hintText,
     required this.obscureText,
     this.prefixIcon,
+    this.errorText,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: TextField(
-        controller: textEditingController,
-        obscureText: obscureText,
-        decoration: InputDecoration(
-          prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: Theme.of(context).colorScheme.primary) : null,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.secondary,
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
             ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.primary,
+          ],
+        ),
+        child: TextField(
+          controller: textEditingController,
+          obscureText: obscureText,
+          style: const TextStyle(fontSize: 16),
+          decoration: InputDecoration(
+            prefixIcon: prefixIcon != null 
+              ? Icon(prefixIcon, color: Theme.of(context).colorScheme.primary.withOpacity(0.7)) 
+              : null,
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+              fontWeight: FontWeight.normal,
             ),
-            borderRadius: BorderRadius.circular(12),
+            errorText: errorText,
+            contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           ),
-          fillColor: Theme.of(context).colorScheme.surface,
-          filled: true,
-          hintText: hintText,
-          hintStyle: TextStyle(
-            color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5),
-            fontWeight: FontWeight.normal,
-          ),
-          contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         ),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/models/onboarding_content.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
+import 'package:thydelivery_mobileapp/services/auth/login_or_register.dart';
+import 'package:thydelivery_mobileapp/services/prefs_service.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -13,6 +15,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final PageController _controller = PageController();
   int _currentIndex = 0;
 
+  void _finishOnboarding() async {
+    await PrefsService.setOnboardingSeen();
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginOrRegister()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +34,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             Align(
               alignment: Alignment.topRight,
               child: TextButton(
-                onPressed: () {
-                  // Navigate to Login
-                },
+                onPressed: _finishOnboarding,
                 child: Text(
                   'Skip',
                   style: AppTextStyles.button.copyWith(
@@ -52,13 +62,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       // Image Placeholder
                       Container(
                         height: 300,
+                        width: double.infinity,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Center(
                           child: Icon(
-                            Icons.fastfood,
+                            index == 0 ? Icons.search_rounded : index == 1 ? Icons.delivery_dining_rounded : Icons.track_changes_rounded,
                             size: 100,
                             color: Theme.of(context).colorScheme.primary,
                           ),
@@ -101,7 +112,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 ElevatedButton(
                   onPressed: () {
                     if (_currentIndex == onboardingContents.length - 1) {
-                      // Navigate to Login
+                      _finishOnboarding();
                     } else {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 300),
