@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
-import 'package:thydelivery_mobileapp/page/my_button.dart';
+import 'package:thydelivery_mobileapp/components/my_button.dart';
 
 class FoodDetails extends StatefulWidget {
   final Food food;

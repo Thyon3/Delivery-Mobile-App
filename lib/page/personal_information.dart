@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/page/deliveryprogress.dart';
-import 'package:thydelivery_mobileapp/page/my_button.dart';
+import 'package:thydelivery_mobileapp/components/my_button.dart';
 import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 
 class PersonalInformation extends StatefulWidget {

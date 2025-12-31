@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/my_text_field.dart';
-import 'package:thydelivery_mobileapp/page/my_button.dart';
+import 'package:thydelivery_mobileapp/components/my_button.dart';
 import 'package:thydelivery_mobileapp/page/home_page.dart';
 import 'package:thydelivery_mobileapp/services/auth/auth_service.dart';
 

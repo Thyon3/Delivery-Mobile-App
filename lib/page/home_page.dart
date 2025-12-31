@@ -7,7 +7,7 @@ import 'package:thydelivery_mobileapp/components/my_sliver_app_bar.dart';
 import 'package:thydelivery_mobileapp/components/my_tab_bar.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
-import 'package:thydelivery_mobileapp/page/my_drawer.dart';
+import 'package:thydelivery_mobileapp/components/my_drawer.dart';
 import 'package:thydelivery_mobileapp/components/my_current_location.dart';
 import 'package:thydelivery_mobileapp/components/food_tile.dart';
 

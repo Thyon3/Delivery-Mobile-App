@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/components/my_cart_imte_tile.dart';
-import 'package:thydelivery_mobileapp/page/my_button.dart';
+import 'package:thydelivery_mobileapp/components/my_button.dart';
 import 'package:thydelivery_mobileapp/page/paymentpage.dart';
 
 class Cart extends StatelessWidget {
