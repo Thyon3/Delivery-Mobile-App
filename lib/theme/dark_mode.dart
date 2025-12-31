@@ -25,7 +25,7 @@ ThemeData darkMode = ThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: const Color(0xFFFF7043),
       foregroundColor: Colors.white,
-      minimumSize: const Offset(double.infinity, 56),
+      minimumSize: const Size(double.infinity, 56),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),

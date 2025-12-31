@@ -4,7 +4,7 @@ import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/components/cart_item_card.dart';
 import 'package:thydelivery_mobileapp/components/order_summary_card.dart';
 import 'package:thydelivery_mobileapp/components/promo_code_input.dart';
-import 'package:thydelivery_mobileapp/page/paymentpage.dart';
+import 'package:thydelivery_mobileapp/page/order/paymentpage.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class Cart extends StatefulWidget {

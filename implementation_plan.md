@@ -76,6 +76,17 @@ This plan outlines the steps to redesign and enhance the Delivery Application to
 - [x] Redesign Settings screen with premium cards and toggles
 - [x] Create "Notifications" list with status indicators
 - [x] Link all new pages in the drawer and profile menu
+### Phase 8: Polish & Premium Features (Commits 121-140+)
+- [x] Create `SavedAddressesPage` with interactive selection
+- [x] Build `SupportChatUI` with automated responses
+- [x] Create `VoucherCard` and `VouchersPage` for rewards
+- [x] Add `HelpCenterPage` with expandable FAQs
+- [x] Refactor folder structure for better scalability
+- [x] Create `ReferralPage` and code sharing UI
+- [x] Implement `HomeSkeleton` for better loading UX
+- [x] Create `OrderSuccessPage` with Lottie/Vector illustration placeholder
+- [ ] Implement "Add to Cart" flying animation placeholder
+- [ ] Final polishing of Hero animations and page transitions
 
 ## Commit Strategy
 - Every component change gets its own commit.

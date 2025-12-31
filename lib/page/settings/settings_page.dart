@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/profile_menu_item.dart';
-import 'package:thydelivery_mobileapp/page/notifications_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/notifications_page.dart';
 import 'package:thydelivery_mobileapp/theme/theme_provider.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:thydelivery_mobileapp/page/home_page.dart';
+import 'package:thydelivery_mobileapp/page/home/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:thydelivery_mobileapp/services/auth/login_or_register.dart';
 
-import 'package:thydelivery_mobileapp/page/onboarding_page.dart';
+import 'package:thydelivery_mobileapp/page/auth/onboarding_page.dart';
 import 'package:thydelivery_mobileapp/services/prefs_service.dart';
 
 class AuthGate extends StatelessWidget {

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/profile_menu_item.dart';
-import 'package:thydelivery_mobileapp/page/favorites_page.dart';
-import 'package:thydelivery_mobileapp/page/notifications_page.dart';
-import 'package:thydelivery_mobileapp/page/orders_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/favorites_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/help_center_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/notifications_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/referral_page.dart';
+import 'package:thydelivery_mobileapp/page/order/orders_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/saved_addresses_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/support_chat_page.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -117,9 +121,9 @@ class ProfilePage extends StatelessWidget {
               onTap: () {},
             ),
             ProfileMenuItem(
-              icon: Icons.location_on_bottom_outlined,
+              icon: Icons.location_on_outlined,
               title: 'Saved Addresses',
-              onTap: () {},
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SavedAddressesPage())),
             ),
             ProfileMenuItem(
               icon: Icons.payment_rounded,
@@ -127,6 +131,11 @@ class ProfilePage extends StatelessWidget {
               onTap: () {},
             ),
 
+            ProfileMenuItem(
+              icon: Icons.share_rounded,
+              title: 'Refer & Earn',
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ReferralPage())),
+            ),
             const SizedBox(height: 24),
             _buildGroupTitle('Preferences'),
             const SizedBox(height: 8),
@@ -157,7 +166,7 @@ class ProfilePage extends StatelessWidget {
             ProfileMenuItem(
               icon: Icons.help_outline_rounded,
               title: 'Help Center',
-              onTap: () {},
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HelpCenterPage())),
             ),
             ProfileMenuItem(
               icon: Icons.info_outline_rounded,

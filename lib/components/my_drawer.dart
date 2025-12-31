@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/drawer_tile.dart';
-import 'package:thydelivery_mobileapp/page/orders_page.dart';
-import 'package:thydelivery_mobileapp/page/favorites_page.dart';
-import 'package:thydelivery_mobileapp/page/profile_page.dart';
-import 'package:thydelivery_mobileapp/page/settings_page.dart';
+import 'package:thydelivery_mobileapp/page/order/orders_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/favorites_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/profile_page.dart';
+import 'package:thydelivery_mobileapp/page/settings/settings_page.dart';
+import 'package:thydelivery_mobileapp/page/profile/vouchers_page.dart';
 import 'package:thydelivery_mobileapp/services/auth/auth_service.dart';
+import 'package:thydelivery_mobileapp/theme/fade_page_route.dart';
 
 class MyDrawer extends StatelessWidget {
+  const MyDrawer({super.key});
   void goToSettings(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SettingsPage()),
+      FadePageRoute(child: const SettingsPage()),
     );
   }
 
@@ -48,7 +51,18 @@ class MyDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const OrdersPage()),
+                FadePageRoute(child: const OrdersPage()),
+              );
+            },
+          ),
+          DrawerTile(
+            title: 'M Y  R E W A R D S',
+            icon: Icons.card_giftcard_rounded,
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                FadePageRoute(child: const VouchersPage()),
               );
             },
           ),
@@ -59,7 +73,7 @@ class MyDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const FavoritesPage()),
+                FadePageRoute(child: const FavoritesPage()),
               );
             },
           ),
@@ -70,7 +84,7 @@ class MyDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
+                FadePageRoute(child: const ProfilePage()),
               );
             },
           ),

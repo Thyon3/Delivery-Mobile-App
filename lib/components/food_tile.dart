@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
-import 'package:thydelivery_mobileapp/page/food_details.dart';
+import 'package:thydelivery_mobileapp/page/food/food_details.dart';
 
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 

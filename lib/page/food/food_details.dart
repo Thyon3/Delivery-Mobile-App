@@ -7,6 +7,10 @@ import 'package:thydelivery_mobileapp/components/quantity_selector.dart';
 import 'package:thydelivery_mobileapp/components/nutritional_info.dart';
 import 'package:thydelivery_mobileapp/components/premium_food_card.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
+import 'package:flutter/services.dart';
+import 'package:thydelivery_mobileapp/theme/app_snackbars.dart';
+
+import 'package:thydelivery_mobileapp/page/cart/cart.dart';
 
 class FoodDetails extends StatefulWidget {
   final Food food;
@@ -17,9 +21,14 @@ class FoodDetails extends StatefulWidget {
   State<FoodDetails> createState() => _FoodDetailsState();
 }
 
-class _FoodDetailsState extends State<FoodDetails> {
+class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStateMixin {
   final Map<AddOns, bool> selectedAddOns = {};
   int quantity = 1;
+  late AnimationController _animationController;
+  late Animation<Offset> _flyAnimation;
+  late Animation<double> _scaleAnimation;
+  late Animation<double> _opacityAnimation;
+  bool _showFlyer = false;
 
   @override
   void initState() {
@@ -28,6 +37,46 @@ class _FoodDetailsState extends State<FoodDetails> {
     for (AddOns addon in widget.food.availableAddOns) {
       selectedAddOns[addon] = false;
     }
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
+
+    _flyAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.4), // Start from bottom
+      end: const Offset(0.35, -0.45), // End at top right
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOutBack,
+    ));
+
+    _scaleAnimation = TweenSequence([
+      TweenSequenceItem(tween: Tween<double>(begin: 1.0, end: 1.5), weight: 20),
+      TweenSequenceItem(tween: Tween<double>(begin: 1.5, end: 0.2), weight: 80),
+    ]).animate(_animationController);
+
+    _opacityAnimation = TweenSequence([
+      TweenSequenceItem(tween: Tween<double>(begin: 0.0, end: 1.0), weight: 10),
+      TweenSequenceItem(tween: Tween<double>(begin: 1.0, end: 1.0), weight: 70),
+      TweenSequenceItem(tween: Tween<double>(begin: 1.0, end: 0.0), weight: 20),
+    ]).animate(_animationController);
+
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          _showFlyer = false;
+        });
+        _animationController.reset();
+        Navigator.pop(context);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   double _calculateTotalPrice() {
@@ -55,17 +104,15 @@ class _FoodDetailsState extends State<FoodDetails> {
     }
 
     // Show success feedback
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$quantity x ${widget.food.name} added to cart!'),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-
-    Navigator.pop(context);
+    if (context.mounted) {
+      HapticFeedback.heavyImpact();
+      AppSnackbars.showSuccess(context, '$quantity x ${widget.food.name} added to cart!');
+      
+      setState(() {
+        _showFlyer = true;
+      });
+      _animationController.forward();
+    }
   }
 
   @override
@@ -92,6 +139,18 @@ class _FoodDetailsState extends State<FoodDetails> {
                   ),
                 ),
                 actions: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white.withOpacity(0.9),
+                      child: IconButton(
+                        icon: Icon(Icons.shopping_cart_outlined, color: Theme.of(context).colorScheme.primary),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const Cart()));
+                        },
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CircleAvatar(
@@ -348,6 +407,43 @@ class _FoodDetailsState extends State<FoodDetails> {
               ),
             ),
           ),
+          
+          // Flying Animation Element
+          if (_showFlyer)
+            IgnorePointer(
+              child: AnimatedBuilder(
+                animation: _animationController,
+                builder: (context, child) {
+                  return Align(
+                    alignment: Alignment(_flyAnimation.value.dx, _flyAnimation.value.dy),
+                    child: Opacity(
+                      opacity: _opacityAnimation.value,
+                      child: Transform.scale(
+                        scale: _scaleAnimation.value,
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage(widget.food.imagePath),
+                              fit: BoxFit.cover,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                                blurRadius: 15,
+                                offset: const Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
         ],
       ),
     );

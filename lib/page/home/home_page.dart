@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/my_description_box.dart';
@@ -10,6 +8,8 @@ import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/components/my_drawer.dart';
 import 'package:thydelivery_mobileapp/components/my_current_location.dart';
 import 'package:thydelivery_mobileapp/components/food_tile.dart';
+import 'package:thydelivery_mobileapp/components/home_skeleton.dart';
+import 'package:thydelivery_mobileapp/page/food/food_details.dart';
 
 import 'package:thydelivery_mobileapp/components/category_pill.dart';
 import 'package:thydelivery_mobileapp/components/custom_home_sliver_app_bar.dart';
@@ -26,7 +26,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Category _selectedCategory = Category.Burger;
+  Category _selectedCategory = Category.burger;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _simulateLoading();
+  }
+
+  Future<void> _simulateLoading() async {
+    await Future.delayed(const Duration(milliseconds: 2000));
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   List<Food> _filterMenuByCategory(Category category, List<Food> menu) {
     return menu.where((food) => food.category == category).toList();
@@ -41,8 +57,10 @@ class _HomePageState extends State<HomePage> {
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           const CustomSliverAppBar(),
         ],
-        body: Consumer<Restaurant>(
-          builder: (context, restaurant, child) {
+        body: _isLoading 
+          ? const HomeSkeleton()
+          : Consumer<Restaurant>(
+              builder: (context, restaurant, child) {
             final filteredMenu = _filterMenuByCategory(_selectedCategory, restaurant.menu);
             
             return SingleChildScrollView(

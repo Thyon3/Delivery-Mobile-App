@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thydelivery_mobileapp/page/cart.dart';
+import 'package:thydelivery_mobileapp/page/cart/cart.dart';
 
 class MySliverAppBar extends StatelessWidget {
   final Widget title;
