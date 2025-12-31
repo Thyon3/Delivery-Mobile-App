@@ -1,128 +1,217 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:thydelivery_mobileapp/components/delivery_stepper.dart';
+import 'package:thydelivery_mobileapp/components/live_tracking_map.dart';
 import 'package:thydelivery_mobileapp/components/myreciet.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
+import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class Deliveryprogress extends StatefulWidget {
+  const Deliveryprogress({super.key});
+
   @override
   State<Deliveryprogress> createState() => _DeliveryprogressState();
 }
 
 class _DeliveryprogressState extends State<Deliveryprogress> {
-  // get access to the database you have created in the services folder
-  FirestoreService db = FirestoreService();
+  final FirestoreService db = FirestoreService();
 
+  @override
   void initState() {
-    // if we get to this page it means that the user has paid so save the orders to the database
-    String orders = context.read<Restaurant>().userCartReciet();
-    String currentAddress = context.read<Restaurant>().getDeliveryAddress;
-    db.saveOrdersToFireStore(orders, currentAddress);
     super.initState();
-
-    // if we get to this page add the user that order to the database also
+    // Save orders to firestore
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      String orders = context.read<Restaurant>().userCartReciet();
+      String currentAddress = context.read<Restaurant>().getDeliveryAddress;
+      db.saveOrdersToFireStore(orders, currentAddress);
+    });
   }
 
-  Widget _customNavigationBar(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(25),
-      height: 100,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(50),
-          topLeft: Radius.circular(50),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: Text(
+          "Track Order",
+          style: AppTextStyles.h2.copyWith(fontSize: 22),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+      ),
+      bottomNavigationBar: _buildDriverInfo(context),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Tracking Map
+            const LiveTrackingMap(),
+            
+            const SizedBox(height: 30),
+
+            // Order Status
+            Text(
+              'Order Status',
+              style: AppTextStyles.h3.copyWith(fontSize: 18),
+            ),
+            const SizedBox(height: 16),
+            const DeliveryStepper(currentStatus: OrderStatus.preparing),
+
+            const SizedBox(height: 30),
+
+            // Reciept Section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Order Details',
+                  style: AppTextStyles.h3.copyWith(fontSize: 18),
+                ),
+                TextButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                      ),
+                      builder: (context) => DraggableScrollableSheet(
+                        initialChildSize: 0.6,
+                        maxChildSize: 0.9,
+                        expand: false,
+                        builder: (context, scrollController) => SingleChildScrollView(
+                          controller: scrollController,
+                          child: const Myreciet(),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'View Receipt',
+                    style: AppTextStyles.bodyS.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 15,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  _buildOrderInfoRow(context, Icons.timer_outlined, 'Estimated Time', '25-30 mins'),
+                  const Divider(height: 30),
+                  _buildOrderInfoRow(context, Icons.location_on_outlined, 'Delivery Address', context.watch<Restaurant>().getDeliveryAddress),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 50),
+          ],
         ),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //drivers profile picture
-          Container(
-            margin: EdgeInsets.only(left: 15),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.person, size: 25),
-            ),
-          ),
-          SizedBox(width: 20),
+    );
+  }
 
-          // driver details
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+  Widget _buildOrderInfoRow(BuildContext context, IconData icon, String label, String value) {
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(icon, color: Theme.of(context).colorScheme.primary, size: 20),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Thyon Mengesha',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                textAlign: TextAlign.start,
-                'Driver',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text(label, style: AppTextStyles.caption),
+              Text(value, style: AppTextStyles.bodyM.copyWith(fontWeight: FontWeight.bold)),
             ],
           ),
-          Spacer(),
+        ),
+      ],
+    );
+  }
 
-          //message Button
-          Container(
-            margin: EdgeInsets.only(left: 15),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.message, size: 25),
+  Widget _buildDriverInfo(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(25, 20, 25, 40),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(35)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, -5),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          // Driver Avatar
+          CircleAvatar(
+            radius: 28,
+            backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            child: const Icon(Icons.person_rounded, color: Colors.grey, size: 30),
+          ),
+          const SizedBox(width: 16),
+          // Driver Details
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Thyon Mengesha',
+                  style: AppTextStyles.h3.copyWith(fontSize: 16),
+                ),
+                Text(
+                  'Your Delivery Hero',
+                  style: AppTextStyles.caption,
+                ),
+              ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(left: 15),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.call,
-                size: 25,
-                color: const Color.fromARGB(255, 34, 131, 37),
-              ),
-            ),
-          ),
-
-          // call B utton
+          // Actions
+          _buildDriverAction(context, Icons.message_rounded, Colors.blue),
+          const SizedBox(width: 12),
+          _buildDriverAction(context, Icons.call_rounded, Colors.green),
         ],
       ),
     );
   }
 
-  Widget build(context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Delivery In progress ...")),
-      bottomNavigationBar: _customNavigationBar(context),
-      body: Center(
-        child: Column(
-          children: [
-            Text('Thank for your order...'),
-            Myreciet(),
-            SizedBox(height: 25),
-            Text('Estimated Delivery Time: 9:10AM'),
-          ],
-        ),
+  Widget _buildDriverAction(BuildContext context, IconData icon, Color color) {
+    return Container(
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        shape: BoxShape.circle,
+      ),
+      child: IconButton(
+        onPressed: () {},
+        icon: Icon(icon, color: color, size: 22),
       ),
     );
   }
