@@ -10,243 +10,87 @@ import 'package:thydelivery_mobileapp/models/address.dart';
 import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 import 'package:thydelivery_mobileapp/services/notifications/notification_service.dart';
 import 'package:thydelivery_mobileapp/models/review.dart';
+import 'package:thydelivery_mobileapp/services/api/api_client.dart';
+import 'package:thydelivery_mobileapp/services/api/restaurant_api.dart';
+import 'package:thydelivery_mobileapp/services/api/order_api.dart';
 
 class Restaurant with ChangeNotifier {
-  final List<Food> menu = [
-    Food(
-      name: 'Asnake burger ',
-      description: ' a burger for Asnake Mengesha so sad  ',
-      price: 12,
-      imagePath: '',
-      category: Category.burger,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-        AddOns(name: 'Asnakes french fires', price: 89),
-      ],
-      reviews: [
-        Review(
-          userName: 'Daniel T.',
-          userAvatar: '',
-          rating: 4.8,
-          comment: 'Best burger I have had in a long time! Highly recommended.',
-          date: DateTime.now().subtract(const Duration(days: 2)),
-        ),
-        Review(
-          userName: 'Sarah Jones',
-          userAvatar: '',
-          rating: 4.5,
-          comment: 'Very juicy and flavorous. The cheese is amazing.',
-          date: DateTime.now().subtract(const Duration(days: 5)),
-        ),
-      ],
-    ),
-    Food(
-      name: 'chocolate Burger ',
-      description:
-          ' burger with a lot of chocolate test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.burger,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.sides,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.salad,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.salad,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.sides,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.drink,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.drink,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.desserts,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.burger,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.desserts,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.drink,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.sides,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.burger,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.sides,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.sides,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.drink,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-        AddOns(name: 'Asnakes french fires ', price: 90),
-      ],
-    ),
-    Food(
-      name: 'cheese Burger ',
-      description:
-          ' burger with a lot of cheesse test it the remaining part of it ',
-      price: 12,
-      imagePath: 'assets/Images/Burgers/Burgersimage.jpg',
-      category: Category.drink,
-      availableAddOns: [
-        AddOns(name: 'cheese', price: 3),
-        AddOns(name: 'cheese two', price: 3),
-      ],
-    ),
-  ];
+  final RestaurantApi _restaurantApi = RestaurantApi(ApiClient());
+  final OrderApi _orderApi = OrderApi(ApiClient());
+  
+  List<Food> _menu = [];
+  List<Food> get menu => _menu;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+  String? _error;
+  String? get error => _error;
+
+  // Fetch menu from backend
+  Future<void> fetchMenu() async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+
+    try {
+      // Get restaurants near a default location or the user's location
+      final restaurants = await _restaurantApi.getNearbyRestaurants(
+        lat: 40.7128, // Default NYC layout for demo
+        lng: -74.0060,
+      );
+
+      if (restaurants.isNotEmpty) {
+        // Use the first restaurant found to populate the "Restaurant App" menu
+        // In a multi-restaurant app, this logic would change.
+        final restaurantId = restaurants[0]['id'];
+        final details = await _restaurantApi.getRestaurantDetails(restaurantId);
+        
+        final List<dynamic> menuItems = details['menuItems'] ?? [];
+        
+        _menu = menuItems.map((item) {
+          // Map backend item to Food model
+          // AddOns mapping needs adjustment if backend structure differs, 
+          // assuming backend sends array of addons.
+          List<AddOns> addons = [];
+          if (item['addons'] != null) {
+            addons = (item['addons'] as List).map((a) => AddOns.fromJson(a)).toList();
+          }
+
+          return Food(
+            id: item['id'],
+            name: item['name'],
+            description: item['description'] ?? '',
+            price: double.tryParse(item['price'].toString()) ?? 0.0,
+            imagePath: item['image'] ?? '', // Handle empty image
+            category: _mapCategory(item['category']?['name'] ?? 'BURGER'),
+            availableAddOns: addons,
+            restaurantId: restaurantId,
+            isAvailable: item['isAvailable'] ?? true,
+          );
+        }).toList();
+      }
+    } catch (e) {
+      _error = e.toString();
+      print('Error fetching menu: $_error');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Category _mapCategory(String categoryName) {
+    switch (categoryName.toUpperCase()) {
+      case 'SIDES': return Category.sides;
+      case 'DRINKS': 
+      case 'DRINK': return Category.drink;
+      case 'DESSERTS': 
+      case 'DESSERT': return Category.desserts;
+      case 'SALADS': 
+      case 'SALAD': return Category.salad;
+      case 'BURGERS': 
+      case 'BURGER': 
+      default: return Category.burger;
+    }
+  }
 
   //
 
@@ -464,11 +308,47 @@ class Restaurant with ChangeNotifier {
   }
   
   Future<void> placeOrder() async {
-    // 1. Clear the cart
-    clearCart();
+    if (_cart.isEmpty) return;
+    
+    _isLoading = true;
+    notifyListeners();
 
-    // 2. Schedule notifications
-    await _scheduleOrderNotifications();
+    try {
+      // Map cart to order items
+      final List<Map<String, dynamic>> orderItems = _cart.map((item) {
+        return {
+          'menuItemId': item.food.id,
+          'quantity': item.quantity,
+          'addons': item.addOns.map((a) => a.id).where((id) => id != null).toList(), // Assuming backend accepts addon IDs
+        };
+      }).toList();
+
+      // Assuming single restaurant for now, use ID from first item
+      final restaurantId = _cart.first.food.restaurantId;
+      
+      if (restaurantId != null) {
+        await _orderApi.createOrder(
+          restaurantId: restaurantId,
+          items: orderItems,
+          deliveryAddressId: 'default-address-id', // Needs address management
+          paymentMethod: 'CASH',
+        );
+      }
+      
+      // 1. Clear the cart
+      clearCart();
+
+      // 2. Schedule notifications (Local simulation or rely on backend push)
+      // Keeping local for immediate feedback
+      await _scheduleOrderNotifications();
+      
+    } catch (e) {
+      print('Order placement failed: $e');
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   Future<void> _scheduleOrderNotifications() async {
