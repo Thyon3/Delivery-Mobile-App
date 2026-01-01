@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:thydelivery_mobileapp/models/review.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
@@ -17,7 +17,7 @@ class ReviewTile extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
+          color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.05),
         ),
       ),
       child: Column(
@@ -27,7 +27,7 @@ class ReviewTile extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 18,
-                backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                backgroundColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
                 child: const Icon(Icons.person_rounded, size: 20, color: Colors.grey),
               ),
               const SizedBox(width: 12),
@@ -49,7 +49,7 @@ class ReviewTile extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.amber.withOpacity(0.1),
+                  color: Colors.amber.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -72,7 +72,7 @@ class ReviewTile extends StatelessWidget {
           Text(
             review.comment,
             style: AppTextStyles.bodyM.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -80,3 +80,4 @@ class ReviewTile extends StatelessWidget {
     );
   }
 }
+

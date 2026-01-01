@@ -30,7 +30,7 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
                 width: 120,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
+                  color: Colors.green.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: const Center(
@@ -52,7 +52,7 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
               Text(
                 'Your delicious meal is being prepared and will be with you shortly.',
                 style: AppTextStyles.bodyM.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -65,7 +65,7 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
+                  border: Border.all(color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -115,4 +115,5 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
     );
   }
 }
+
 

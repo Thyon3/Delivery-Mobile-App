@@ -122,7 +122,7 @@ class _SearchField extends StatelessWidget {
           border: InputBorder.none,
           hintText: 'Search questionsâ€¦',
           hintStyle: AppTextStyles.bodyM.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.45),
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.45),
           ),
           icon: Icon(
             Icons.search_rounded,
@@ -138,7 +138,7 @@ class _SearchField extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.close_rounded,
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
         ),
@@ -208,7 +208,7 @@ class _FaqCategorySection extends StatelessWidget {
                         item.answer,
                         style: AppTextStyles.bodyM.copyWith(
                           height: 1.4,
-                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.72),
+                          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.72),
                         ),
                       ),
                     ),
@@ -232,7 +232,7 @@ class _SupportCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(DesignSystem.paddingL),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.10),
+        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(DesignSystem.radiusL),
       ),
       child: Row(
@@ -302,7 +302,7 @@ class _EmptyState extends StatelessWidget {
           Text(
             'Try a different keyword, or contact support.',
             style: AppTextStyles.bodyM.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           if (query.trim().isNotEmpty) ...[
@@ -310,7 +310,7 @@ class _EmptyState extends StatelessWidget {
             Text(
               'Search: "$query"',
               style: AppTextStyles.caption.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.55),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.55),
               ),
             ),
           ],
@@ -412,4 +412,5 @@ const List<FaqCategory> _faqCategories = [
     ],
   ),
 ];
+
 

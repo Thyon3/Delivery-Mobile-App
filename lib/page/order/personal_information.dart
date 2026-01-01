@@ -72,7 +72,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
             Text(
               'Please provide your details for delivery.',
               style: AppTextStyles.bodyM.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
               ),
             ),
             const SizedBox(height: 40),
@@ -112,4 +112,5 @@ class _PersonalInformationState extends State<PersonalInformation> {
     );
   }
 }
+
 

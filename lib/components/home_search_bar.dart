@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 class HomeSearchBar extends StatelessWidget {
   final Function(String)? onChanged;
@@ -20,13 +20,13 @@ class HomeSearchBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
         ],
         border: Border.all(
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.05),
+          color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.05),
         ),
       ),
       child: Row(
@@ -43,7 +43,7 @@ class HomeSearchBar extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: 'Search for food, restaurants...',
                 hintStyle: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
                   fontSize: 14,
                 ),
                 border: InputBorder.none,
@@ -56,7 +56,7 @@ class HomeSearchBar extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -70,3 +70,4 @@ class HomeSearchBar extends StatelessWidget {
     );
   }
 }
+

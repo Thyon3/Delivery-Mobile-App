@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class FilterChipGroup extends StatefulWidget {
@@ -47,11 +47,11 @@ class _FilterChipGroupState extends State<FilterChipGroup> {
                 border: Border.all(
                   color: isSelected 
                     ? Theme.of(context).colorScheme.primary 
-                    : Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                    : Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
                 ),
                 boxShadow: isSelected ? [
                   BoxShadow(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   )
@@ -60,7 +60,7 @@ class _FilterChipGroupState extends State<FilterChipGroup> {
               child: Text(
                 filter,
                 style: AppTextStyles.bodyS.copyWith(
-                  color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                   fontSize: 13,
                 ),
@@ -72,3 +72,4 @@ class _FilterChipGroupState extends State<FilterChipGroup> {
     );
   }
 }
+

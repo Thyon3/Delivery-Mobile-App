@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/app_image.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
@@ -28,7 +28,7 @@ class PremiumFoodCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
@@ -112,7 +112,7 @@ class PremiumFoodCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        '• 25-35 min',
+                        'â€¢ 25-35 min',
                         style: AppTextStyles.caption,
                       ),
                     ],
@@ -148,3 +148,4 @@ class PremiumFoodCard extends StatelessWidget {
     );
   }
 }
+

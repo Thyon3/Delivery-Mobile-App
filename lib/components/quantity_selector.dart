@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class QuantitySelector extends StatelessWidget {
@@ -21,7 +21,7 @@ class QuantitySelector extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
           width: 1.5,
         ),
       ),
@@ -72,15 +72,16 @@ class QuantitySelector extends StatelessWidget {
         decoration: BoxDecoration(
           color: isEnabled 
             ? Theme.of(context).colorScheme.primary 
-            : Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+            : Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3),
           shape: BoxShape.circle,
         ),
         child: Icon(
           icon,
           size: 18,
-          color: isEnabled ? Colors.white : Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+          color: isEnabled ? Colors.white : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
         ),
       ),
     );
   }
 }
+

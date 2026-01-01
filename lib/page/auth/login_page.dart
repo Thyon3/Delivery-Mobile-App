@@ -64,7 +64,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               height: 300,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.05),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
               ),
             ),
           ),
@@ -86,7 +86,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
                           blurRadius: 15,
                           offset: const Offset(0, 8),
                         ),
@@ -108,7 +108,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Text(
                     'Login to continue your culinary journey',
                     style: AppTextStyles.bodyM.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
 
@@ -164,7 +164,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   // Or continue with divider
                   Row(
                     children: [
-                      Expanded(child: Divider(color: Theme.of(context).colorScheme.secondary.withOpacity(0.3))),
+                      Expanded(child: Divider(color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3))),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
@@ -172,7 +172,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           style: AppTextStyles.caption.copyWith(fontSize: 10),
                         ),
                       ),
-                      Expanded(child: Divider(color: Theme.of(context).colorScheme.secondary.withOpacity(0.3))),
+                      Expanded(child: Divider(color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3))),
                     ],
                   ),
 
@@ -232,4 +232,5 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
   }
 }
+
 

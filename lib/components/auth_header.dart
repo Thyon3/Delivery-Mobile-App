@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class AuthHeader extends StatelessWidget {
@@ -18,7 +18,7 @@ class AuthHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(
@@ -38,7 +38,7 @@ class AuthHeader extends StatelessWidget {
         Text(
           subtitle,
           style: AppTextStyles.bodyM.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
           ),
           textAlign: TextAlign.center,
         ),
@@ -46,3 +46,4 @@ class AuthHeader extends StatelessWidget {
     );
   }
 }
+

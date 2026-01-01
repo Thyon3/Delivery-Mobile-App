@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -24,7 +24,7 @@ class MyTextField extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.03),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),
@@ -36,11 +36,11 @@ class MyTextField extends StatelessWidget {
           style: const TextStyle(fontSize: 16),
           decoration: InputDecoration(
             prefixIcon: prefixIcon != null 
-              ? Icon(prefixIcon, color: Theme.of(context).colorScheme.primary.withOpacity(0.7)) 
+              ? Icon(prefixIcon, color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.7)) 
               : null,
             hintText: hintText,
             hintStyle: TextStyle(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
               fontWeight: FontWeight.normal,
             ),
             errorText: errorText,
@@ -51,3 +51,4 @@ class MyTextField extends StatelessWidget {
     );
   }
 }
+

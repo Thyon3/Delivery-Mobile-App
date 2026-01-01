@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 import 'package:thydelivery_mobileapp/theme/design_system.dart';
 
@@ -33,7 +33,7 @@ class MyButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: (color ?? Theme.of(context).colorScheme.primary).withOpacity(0.3),
+                color: (color ?? Theme.of(context).colorScheme.primary).withValues(alpha: 0.3),
                 blurRadius: 12,
                 offset: const Offset(0, 6),
               ),
@@ -52,3 +52,4 @@ class MyButton extends StatelessWidget {
     );
   }
 }
+

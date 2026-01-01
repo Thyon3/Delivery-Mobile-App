@@ -29,7 +29,7 @@ class CustomSliverAppBar extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
           child: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            backgroundColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
             child: Icon(Icons.person_rounded, color: Theme.of(context).colorScheme.primary),
           ),
         ),
@@ -68,4 +68,5 @@ class CustomSliverAppBar extends StatelessWidget {
     );
   }
 }
+
 

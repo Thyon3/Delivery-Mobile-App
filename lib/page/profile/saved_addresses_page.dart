@@ -111,7 +111,7 @@ class _SavedAddressesPageState extends State<SavedAddressesPage> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 side: BorderSide(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                  color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
                   width: 2,
                   style: BorderStyle.solid, // Note: dashed borders require a custom painter/package
                 ),
@@ -153,4 +153,5 @@ class _SavedAddressesPageState extends State<SavedAddressesPage> {
     );
   }
 }
+
 

@@ -84,7 +84,7 @@ class _CartState extends State<Cart> {
                               child: Text(
                                 'Cancel',
                                 style: AppTextStyles.button.copyWith(
-                                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                                 ),
                               ),
                             ),
@@ -120,7 +120,7 @@ class _CartState extends State<Cart> {
                       Icon(
                         Icons.shopping_cart_outlined,
                         size: 100,
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
                       ),
                       const SizedBox(height: 16),
                       Text(
@@ -131,7 +131,7 @@ class _CartState extends State<Cart> {
                       Text(
                         'Add some delicious items to get started!',
                         style: AppTextStyles.bodyM.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -187,7 +187,7 @@ class _CartState extends State<Cart> {
                         color: Theme.of(context).colorScheme.surface,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.black.withValues(alpha: 0.1),
                             blurRadius: 20,
                             offset: const Offset(0, -5),
                           ),
@@ -222,7 +222,7 @@ class _CartState extends State<Cart> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
+                                  color: Colors.white.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
@@ -242,4 +242,5 @@ class _CartState extends State<Cart> {
     );
   }
 }
+
 

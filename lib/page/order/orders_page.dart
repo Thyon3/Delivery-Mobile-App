@@ -51,7 +51,7 @@ class OrdersPage extends StatelessWidget {
                   Icon(
                     Icons.history_rounded,
                     size: 80,
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.2),
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -229,4 +229,5 @@ class OrdersPage extends StatelessWidget {
     );
   }
 }
+
 

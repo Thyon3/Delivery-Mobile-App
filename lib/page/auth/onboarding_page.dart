@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/models/onboarding_content.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 import 'package:thydelivery_mobileapp/services/auth/login_or_register.dart';
@@ -66,7 +66,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             color: Theme.of(context)
                                 .colorScheme
                                 .secondary
-                                .withOpacity(0.1),
+                                .withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
@@ -94,7 +94,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             color: Theme.of(context)
                                 .colorScheme
                                 .onSurface
-                                .withOpacity(0.7),
+                                .withValues(alpha: 0.7),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -158,8 +158,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
         borderRadius: BorderRadius.circular(20),
         color: _currentIndex == index
             ? Theme.of(context).colorScheme.primary
-            : Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            : Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
       ),
     );
   }
 }
+

@@ -132,7 +132,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                 leading: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CircleAvatar(
-                    backgroundColor: Colors.white.withOpacity(0.9),
+                    backgroundColor: Colors.white.withValues(alpha: 0.9),
                     child: IconButton(
                       icon: Icon(Icons.arrow_back_rounded, color: Theme.of(context).colorScheme.primary),
                       onPressed: () => Navigator.pop(context),
@@ -143,7 +143,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: CircleAvatar(
-                      backgroundColor: Colors.white.withOpacity(0.9),
+                      backgroundColor: Colors.white.withValues(alpha: 0.9),
                       child: IconButton(
                         icon: Icon(Icons.shopping_cart_outlined, color: Theme.of(context).colorScheme.primary),
                         onPressed: () {
@@ -158,7 +158,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                       builder: (context, restaurant, child) {
                         final isFavorite = restaurant.isFavorite(widget.food);
                         return CircleAvatar(
-                          backgroundColor: Colors.white.withOpacity(0.9),
+                          backgroundColor: Colors.white.withValues(alpha: 0.9),
                           child: IconButton(
                             icon: Icon(
                               isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
@@ -229,7 +229,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Text(
@@ -254,7 +254,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                         Text(
                           widget.food.description,
                           style: AppTextStyles.bodyM.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                             height: 1.5,
                           ),
                         ),
@@ -377,7 +377,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                 color: Theme.of(context).colorScheme.surface,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 20,
                     offset: const Offset(0, -5),
                   ),
@@ -405,7 +405,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
@@ -443,7 +443,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
                                 blurRadius: 15,
                                 offset: const Offset(0, 5),
                               ),
@@ -461,4 +461,5 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
     );
   }
 }
+
 

@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+﻿import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class AppImage extends StatelessWidget {
@@ -24,7 +24,7 @@ class AppImage extends StatelessWidget {
         height: height,
         fit: fit,
         placeholder: (context, url) => Container(
-          color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+          color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
           child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
         ),
         errorWidget: (context, url, error) => const Icon(Icons.error_outline),
@@ -39,3 +39,4 @@ class AppImage extends StatelessWidget {
     }
   }
 }
+

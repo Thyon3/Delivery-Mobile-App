@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class LiveTrackingMap extends StatelessWidget {
@@ -10,7 +10,7 @@ class LiveTrackingMap extends StatelessWidget {
       height: 250,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+        color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(25),
         image: DecorationImage(
           image: NetworkImage(
@@ -18,7 +18,7 @@ class LiveTrackingMap extends StatelessWidget {
           ),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.2),
+            Colors.black.withValues(alpha: 0.2),
             BlendMode.darken,
           ),
         ),
@@ -45,7 +45,7 @@ class LiveTrackingMap extends StatelessWidget {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: Colors.black.withValues(alpha: 0.1),
                     blurRadius: 10,
                   ),
                 ],
@@ -80,7 +80,7 @@ class LiveTrackingMap extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
@@ -118,7 +118,7 @@ class LiveTrackingMap extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 5,
           ),
         ],
@@ -127,3 +127,4 @@ class LiveTrackingMap extends StatelessWidget {
     );
   }
 }
+

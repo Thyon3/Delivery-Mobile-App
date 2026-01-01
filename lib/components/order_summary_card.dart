@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class OrderSummaryCard extends StatelessWidget {
@@ -25,7 +25,7 @@ class OrderSummaryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -62,7 +62,7 @@ class OrderSummaryCard extends StatelessWidget {
           ],
           
           const SizedBox(height: 16),
-          Divider(color: Theme.of(context).colorScheme.secondary.withOpacity(0.2)),
+          Divider(color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.2)),
           const SizedBox(height: 16),
           
           Row(
@@ -93,7 +93,7 @@ class OrderSummaryCard extends StatelessWidget {
         Text(
           label,
           style: AppTextStyles.bodyM.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
           ),
         ),
         Text(
@@ -107,3 +107,4 @@ class OrderSummaryCard extends StatelessWidget {
     );
   }
 }
+

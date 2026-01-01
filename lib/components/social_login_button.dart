@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 class SocialLoginButton extends StatelessWidget {
   final String logoPath;
@@ -20,7 +20,7 @@ class SocialLoginButton extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.3)),
+            border: Border.all(color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3)),
             borderRadius: BorderRadius.circular(16),
             color: Theme.of(context).colorScheme.surface,
           ),
@@ -44,3 +44,4 @@ class SocialLoginButton extends StatelessWidget {
     );
   }
 }
+

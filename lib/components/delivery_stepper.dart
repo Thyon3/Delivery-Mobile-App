@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 enum OrderStatus { placed, confirmed, preparing, onTheWay, delivered }
@@ -26,7 +26,7 @@ class DeliveryStepper extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -99,11 +99,11 @@ class DeliveryStepper extends StatelessWidget {
             shape: BoxShape.circle,
             color: isCompleted || isActive
                 ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                : Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
             border: Border.all(
               color: isCompleted || isActive
                   ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+                  : Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3),
               width: 2,
             ),
           ),
@@ -111,7 +111,7 @@ class DeliveryStepper extends StatelessWidget {
             isCompleted ? Icons.check_rounded : icon,
             color: isCompleted || isActive
                 ? Colors.white
-                : Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
             size: 24,
           ),
         ),
@@ -122,7 +122,7 @@ class DeliveryStepper extends StatelessWidget {
             style: AppTextStyles.bodyM.copyWith(
               fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
               color: isPending
-                  ? Theme.of(context).colorScheme.onSurface.withOpacity(0.4)
+                  ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4)
                   : Theme.of(context).colorScheme.onSurface,
             ),
           ),
@@ -131,7 +131,7 @@ class DeliveryStepper extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
@@ -161,8 +161,9 @@ class DeliveryStepper extends StatelessWidget {
         height: 30,
         color: isCompleted
             ? Theme.of(context).colorScheme.primary
-            : Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+            : Theme.of(context).colorScheme.secondary.withValues(alpha: 0.2),
       ),
     );
   }
 }
+

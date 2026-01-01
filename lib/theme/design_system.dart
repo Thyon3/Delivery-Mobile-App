@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 class DesignSystem {
   // Padding & Spacing
@@ -17,7 +17,7 @@ class DesignSystem {
   // Shadows
   static List<BoxShadow> softShadow = [
     BoxShadow(
-      color: Colors.black.withOpacity(0.05),
+      color: Colors.black.withValues(alpha: 0.05),
       blurRadius: 10,
       offset: const Offset(0, 4),
     ),
@@ -25,7 +25,7 @@ class DesignSystem {
 
   static List<BoxShadow> mediumShadow = [
     BoxShadow(
-      color: Colors.black.withOpacity(0.1),
+      color: Colors.black.withValues(alpha: 0.1),
       blurRadius: 20,
       offset: const Offset(0, 8),
     ),
@@ -38,3 +38,4 @@ class DesignSystem {
     end: Alignment.bottomRight,
   );
 }
+

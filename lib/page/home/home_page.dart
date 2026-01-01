@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             'No items found matching "$_searchQuery"',
                             style: AppTextStyles.bodyM.copyWith(
-                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
                             ),
                           ),
                         ),
@@ -248,4 +248,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
 

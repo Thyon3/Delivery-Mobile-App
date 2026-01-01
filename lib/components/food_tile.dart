@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/app_image.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:thydelivery_mobileapp/page/food/food_details.dart';
@@ -27,7 +27,7 @@ class FoodTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: Colors.black.withValues(alpha: 0.03),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -63,7 +63,7 @@ class FoodTile extends StatelessWidget {
                   Text(
                     food.description,
                     style: AppTextStyles.caption.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -104,3 +104,4 @@ class FoodTile extends StatelessWidget {
     );
   }
 }
+

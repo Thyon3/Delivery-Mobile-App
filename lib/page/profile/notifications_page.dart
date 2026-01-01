@@ -66,7 +66,7 @@ class NotificationsPage extends StatelessWidget {
                   Icon(
                     Icons.notifications_none_rounded,
                     size: 80,
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.2),
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -86,15 +86,15 @@ class NotificationsPage extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: notification['isRead'] as bool
-                        ? Theme.of(context).colorScheme.surface.withOpacity(0.5)
+                        ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.5)
                         : Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(20),
                     border: notification['isRead'] as bool
                         ? null
-                        : Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.1), width: 1),
+                        : Border.all(color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1), width: 1),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.02),
+                        color: Colors.black.withValues(alpha: 0.02),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -106,7 +106,7 @@ class NotificationsPage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: (notification['color'] as Color).withOpacity(0.1),
+                          color: (notification['color'] as Color).withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -144,7 +144,7 @@ class NotificationsPage extends StatelessWidget {
                             Text(
                               notification['body'] as String,
                               style: AppTextStyles.bodyS.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -163,4 +163,5 @@ class NotificationsPage extends StatelessWidget {
     );
   }
 }
+
 

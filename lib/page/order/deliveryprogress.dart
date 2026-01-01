@@ -125,7 +125,7 @@ class _DeliveryprogressState extends State<Deliveryprogress> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
+                    color: Colors.black.withValues(alpha: 0.05),
                     blurRadius: 15,
                   ),
                 ],
@@ -152,7 +152,7 @@ class _DeliveryprogressState extends State<Deliveryprogress> {
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(icon, color: Theme.of(context).colorScheme.primary, size: 20),
@@ -179,7 +179,7 @@ class _DeliveryprogressState extends State<Deliveryprogress> {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(35)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, -5),
           ),
@@ -190,7 +190,7 @@ class _DeliveryprogressState extends State<Deliveryprogress> {
           // Driver Avatar
           CircleAvatar(
             radius: 28,
-            backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            backgroundColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
             child: const Icon(Icons.person_rounded, color: Colors.grey, size: 30),
           ),
           const SizedBox(width: 16),
@@ -223,7 +223,7 @@ class _DeliveryprogressState extends State<Deliveryprogress> {
   Widget _buildDriverAction(BuildContext context, IconData icon, Color color) {
     return Container(
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         shape: BoxShape.circle,
       ),
       child: IconButton(
@@ -233,4 +233,5 @@ class _DeliveryprogressState extends State<Deliveryprogress> {
     );
   }
 }
+
 

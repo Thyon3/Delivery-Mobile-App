@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class PromoCodeInput extends StatefulWidget {
@@ -60,7 +60,7 @@ class _PromoCodeInputState extends State<PromoCodeInput> {
         border: Border.all(
           color: _isApplied 
             ? Colors.green 
-            : Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+            : Theme.of(context).colorScheme.secondary.withValues(alpha: 0.2),
           width: _isApplied ? 2 : 1,
         ),
       ),
@@ -78,7 +78,7 @@ class _PromoCodeInputState extends State<PromoCodeInput> {
               decoration: InputDecoration(
                 hintText: 'Enter promo code',
                 hintStyle: AppTextStyles.bodyM.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
                 ),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
@@ -93,7 +93,7 @@ class _PromoCodeInputState extends State<PromoCodeInput> {
             IconButton(
               icon: const Icon(Icons.close_rounded),
               onPressed: _removePromo,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
             )
           else
             ElevatedButton(
@@ -117,3 +117,4 @@ class _PromoCodeInputState extends State<PromoCodeInput> {
     );
   }
 }
+

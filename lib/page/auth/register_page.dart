@@ -85,7 +85,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
               height: 300,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.05),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
               ),
             ),
           ),
@@ -115,7 +115,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   Text(
                     'Join us and enjoy delicious meals',
                     style: AppTextStyles.bodyM.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
 
@@ -192,7 +192,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                   // Or continue with divider
                   Row(
                     children: [
-                      Expanded(child: Divider(color: Theme.of(context).colorScheme.secondary.withOpacity(0.3))),
+                      Expanded(child: Divider(color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3))),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
@@ -200,7 +200,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                           style: AppTextStyles.caption.copyWith(fontSize: 10),
                         ),
                       ),
-                      Expanded(child: Divider(color: Theme.of(context).colorScheme.secondary.withOpacity(0.3))),
+                      Expanded(child: Divider(color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3))),
                     ],
                   ),
 
@@ -260,4 +260,5 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     );
   }
 }
+
 

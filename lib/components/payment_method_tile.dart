@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class PaymentMethodTile extends StatelessWidget {
@@ -25,13 +25,13 @@ class PaymentMethodTile extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isSelected 
-            ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
+            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
             : Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
             color: isSelected 
               ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+              : Theme.of(context).colorScheme.secondary.withValues(alpha: 0.2),
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -42,15 +42,15 @@ class PaymentMethodTile extends StatelessWidget {
               height: 50,
               decoration: BoxDecoration(
                 color: isSelected 
-                  ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
-                  : Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                  ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
+                  : Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 icon,
                 color: isSelected 
                   ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                  : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                 size: 24,
               ),
             ),
@@ -75,7 +75,7 @@ class PaymentMethodTile extends StatelessWidget {
                 border: Border.all(
                   color: isSelected 
                     ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                    : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
                   width: 2,
                 ),
               ),
@@ -93,3 +93,4 @@ class PaymentMethodTile extends StatelessWidget {
     );
   }
 }
+

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class CategoryPill extends StatefulWidget {
@@ -53,11 +53,11 @@ class _CategoryPillState extends State<CategoryPill> with SingleTickerProviderSt
           decoration: BoxDecoration(
             color: widget.isSelected 
               ? Theme.of(context).colorScheme.primary 
-              : Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+              : Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(25),
             boxShadow: widget.isSelected ? [
               BoxShadow(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -69,7 +69,7 @@ class _CategoryPillState extends State<CategoryPill> with SingleTickerProviderSt
               style: AppTextStyles.bodyM.copyWith(
                 color: widget.isSelected 
                   ? Colors.white 
-                  : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                  : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                 fontWeight: widget.isSelected ? FontWeight.bold : FontWeight.w500,
               ),
             ),
@@ -79,3 +79,4 @@ class _CategoryPillState extends State<CategoryPill> with SingleTickerProviderSt
     );
   }
 }
+

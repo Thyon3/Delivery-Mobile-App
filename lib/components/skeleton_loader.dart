@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 class SkeletonLoader extends StatefulWidget {
   final double width;
@@ -47,7 +47,7 @@ class _SkeletonLoaderState extends State<SkeletonLoader> with SingleTickerProvid
             width: widget.width,
             height: widget.height,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(widget.borderRadius),
             ),
           ),
@@ -56,3 +56,4 @@ class _SkeletonLoaderState extends State<SkeletonLoader> with SingleTickerProvid
     );
   }
 }
+

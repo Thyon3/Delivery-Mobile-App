@@ -32,7 +32,7 @@ class ReferralPage extends StatelessWidget {
               height: 200,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.05),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Icon(
@@ -52,7 +52,7 @@ class ReferralPage extends StatelessWidget {
             Text(
               'Share your code and get \$15 for every friend who places their first order.',
               style: AppTextStyles.bodyM.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
               ),
               textAlign: TextAlign.center,
             ),
@@ -65,7 +65,7 @@ class ReferralPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Theme.of(context).colorScheme.secondary.withOpacity(0.1)),
+                border: Border.all(color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1)),
               ),
               child: Column(
                 children: [
@@ -115,4 +115,5 @@ class ReferralPage extends StatelessWidget {
     );
   }
 }
+
 
