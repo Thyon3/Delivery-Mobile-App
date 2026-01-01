@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/firebase_options.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
@@ -13,15 +14,17 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.initialize();
   runApp(
-    MultiProvider(
-      providers: [
-        //Theme Provider
-        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+    ProviderScope(
+      child: MultiProvider(
+        providers: [
+          //Theme Provider
+          ChangeNotifierProvider(create: (context) => ThemeProvider()),
 
-        //Restaurant provider
-        ChangeNotifierProvider(create: (context) => Restaurant()),
-      ],
-      child: const MyApp(),
+          //Restaurant provider
+          ChangeNotifierProvider(create: (context) => Restaurant()),
+        ],
+        child: const MyApp(),
+      ),
     ),
   );
 }
