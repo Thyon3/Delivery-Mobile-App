@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/profile_menu_item.dart';
 import 'package:thydelivery_mobileapp/page/profile/favorites_page.dart';
 import 'package:thydelivery_mobileapp/page/profile/help_center_page.dart';
@@ -15,7 +15,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           'Profile',
@@ -229,3 +229,4 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
+

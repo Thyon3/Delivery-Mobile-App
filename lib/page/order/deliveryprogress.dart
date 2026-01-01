@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/delivery_stepper.dart';
 import 'package:thydelivery_mobileapp/components/live_tracking_map.dart';
@@ -48,7 +48,7 @@ class _DeliveryprogressState extends State<Deliveryprogress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           "Track Order",
@@ -233,3 +233,4 @@ class _DeliveryprogressState extends State<Deliveryprogress> {
     );
   }
 }
+

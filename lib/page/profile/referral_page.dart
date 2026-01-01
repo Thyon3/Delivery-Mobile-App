@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thydelivery_mobileapp/theme/app_snackbars.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
@@ -11,7 +11,7 @@ class ReferralPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           'Refer & Earn',
@@ -115,3 +115,4 @@ class ReferralPage extends StatelessWidget {
     );
   }
 }
+

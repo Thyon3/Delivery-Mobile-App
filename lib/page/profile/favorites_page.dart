@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/premium_food_card.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
@@ -11,7 +11,7 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           'Favorites',
@@ -74,3 +74,4 @@ class FavoritesPage extends StatelessWidget {
     );
   }
 }
+

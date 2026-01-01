@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/page/profile/support_chat_page.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 import 'package:thydelivery_mobileapp/theme/design_system.dart';
@@ -38,7 +38,7 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
             .toList();
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           'Help Center',
@@ -120,7 +120,7 @@ class _SearchField extends StatelessWidget {
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: 'Search questions…',
+          hintText: 'Search questionsâ€¦',
           hintStyle: AppTextStyles.bodyM.copyWith(
             color: Theme.of(context).colorScheme.onSurface.withOpacity(0.45),
           ),
@@ -405,10 +405,11 @@ const List<FaqCategory> _faqCategories = [
       ),
       FaqItem(
         id: 'payment_failed',
-        question: 'My payment failed — what should I do?',
+        question: 'My payment failed â€” what should I do?',
         answer:
             'Try again with a different payment method, ensure your card details are correct, or contact your bank if the issue persists.',
       ),
     ],
   ),
 ];
+

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/order_history_tile.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
@@ -11,21 +11,21 @@ class OrdersPage extends StatelessWidget {
     final mockOrders = [
       {
         'id': '#THY7892',
-        'date': 'Oct 12, 2023 • 12:45 PM',
+        'date': 'Oct 12, 2023 â€¢ 12:45 PM',
         'amount': 42.50,
         'status': 'Delivered',
         'items': ['Cheese Burger', 'French Fries', 'Coca Cola'],
       },
       {
         'id': '#THY7845',
-        'date': 'Oct 10, 2023 • 07:15 PM',
+        'date': 'Oct 10, 2023 â€¢ 07:15 PM',
         'amount': 28.00,
         'status': 'Processing',
         'items': ['Pepperoni Pizza', 'Garlic Bread'],
       },
       {
         'id': '#THY7712',
-        'date': 'Oct 05, 2023 • 01:20 PM',
+        'date': 'Oct 05, 2023 â€¢ 01:20 PM',
         'amount': 15.75,
         'status': 'Cancelled',
         'items': ['Veggie Wrap', 'Orange Juice'],
@@ -33,7 +33,7 @@ class OrdersPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           'My Orders',
@@ -90,7 +90,7 @@ class OrdersPage extends StatelessWidget {
       builder: (context) => Container(
         height: MediaQuery.of(context).size.height * 0.75,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
         ),
         padding: const EdgeInsets.all(24),
@@ -229,3 +229,4 @@ class OrdersPage extends StatelessWidget {
     );
   }
 }
+

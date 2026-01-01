@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/home_search_bar.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
@@ -18,7 +18,7 @@ class CustomSliverAppBar extends StatelessWidget {
       expandedHeight: 140,
       floating: false,
       pinned: true,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       elevation: 0,
       scrolledUnderElevation: 0,
       leading: IconButton(
@@ -68,3 +68,4 @@ class CustomSliverAppBar extends StatelessWidget {
     );
   }
 }
+

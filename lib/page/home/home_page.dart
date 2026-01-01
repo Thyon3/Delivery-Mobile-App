@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/my_description_box.dart';
 import 'package:thydelivery_mobileapp/components/my_sliver_app_bar.dart';
@@ -34,41 +34,19 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _simulateLoading();
-    // Load data from Firestore
-    final restaurant = Provider.of<Restaurant>(context, listen: false);
-    restaurant.loadFavorites();
-    restaurant.loadAddresses();
+    // Load data from Backend & Firestore
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final restaurant = Provider.of<Restaurant>(context, listen: false);
+      restaurant.fetchMenu();
+      restaurant.loadFavorites();
+      restaurant.loadAddresses();
+    });
 
     _searchController.addListener(() {
       setState(() {
         _searchQuery = _searchController.text;
       });
     });
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  List<Food> _filterMenuBySearch(List<Food> menu) {
-    if (_searchQuery.isEmpty) return menu;
-    final query = _searchQuery.toLowerCase();
-    return menu.where((food) {
-      return food.name.toLowerCase().contains(query) || 
-             food.description.toLowerCase().contains(query);
-    }).toList();
-  }
-
-  Future<void> _simulateLoading() async {
-    await Future.delayed(const Duration(milliseconds: 2000));
-    if (mounted) {
-      setState(() {
-        _isLoading = false;
-      });
-    }
   }
 
   List<Food> _filterMenuByCategory(Category category, List<Food> menu) {
@@ -78,7 +56,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       drawer: const MyDrawer(),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -270,3 +248,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+

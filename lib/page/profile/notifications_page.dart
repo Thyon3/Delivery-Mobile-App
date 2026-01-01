@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class NotificationsPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class NotificationsPage extends StatelessWidget {
         'color': Colors.green,
       },
       {
-        'title': 'Special Offer 🎁',
+        'title': 'Special Offer ðŸŽ',
         'body': 'Get 50% OFF on your next burger order. Use code BURGER50.',
         'time': '1 hour ago',
         'isRead': false,
@@ -42,7 +42,7 @@ class NotificationsPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           'Notifications',
@@ -163,3 +163,4 @@ class NotificationsPage extends StatelessWidget {
     );
   }
 }
+

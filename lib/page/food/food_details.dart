@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
@@ -119,7 +119,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(
         children: [
           CustomScrollView(
@@ -128,7 +128,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
               SliverAppBar(
                 expandedHeight: 300,
                 pinned: true,
-                backgroundColor: Theme.of(context).colorScheme.background,
+                backgroundColor: Theme.of(context).colorScheme.surface,
                 leading: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CircleAvatar(
@@ -189,7 +189,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
               SliverToBoxAdapter(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
                   ),
                   child: Padding(
@@ -374,7 +374,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
             child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
@@ -461,3 +461,4 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
     );
   }
 }
+

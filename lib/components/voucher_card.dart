@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class VoucherCard extends StatelessWidget {
@@ -81,7 +81,7 @@ class VoucherCard extends StatelessWidget {
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 shape: BoxShape.circle,
               ),
             ),
@@ -93,7 +93,7 @@ class VoucherCard extends StatelessWidget {
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 shape: BoxShape.circle,
               ),
             ),
@@ -113,3 +113,4 @@ class VoucherCard extends StatelessWidget {
     );
   }
 }
+

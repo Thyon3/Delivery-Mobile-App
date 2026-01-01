@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/address_tile.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
@@ -72,7 +72,7 @@ class _SavedAddressesPageState extends State<SavedAddressesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           'Saved Addresses',
@@ -153,3 +153,4 @@ class _SavedAddressesPageState extends State<SavedAddressesPage> {
     );
   }
 }
+

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/voucher_card.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
@@ -32,7 +32,7 @@ class VouchersPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text(
           'My Rewards',
@@ -67,3 +67,4 @@ class VouchersPage extends StatelessWidget {
     );
   }
 }
+

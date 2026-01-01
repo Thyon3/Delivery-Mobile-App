@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thydelivery_mobileapp/components/my_text_field.dart';
 import 'package:thydelivery_mobileapp/components/my_button.dart';
@@ -73,7 +73,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(
         children: [
           // Background decorative circles
@@ -260,3 +260,4 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     );
   }
 }
+

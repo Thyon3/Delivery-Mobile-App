@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/page/order/deliveryprogress.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
@@ -16,7 +16,7 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(25.0),
@@ -115,3 +115,4 @@ class _OrderSuccessPageState extends State<OrderSuccessPage> {
     );
   }
 }
+
