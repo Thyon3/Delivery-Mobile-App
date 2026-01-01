@@ -55,7 +55,11 @@ class _HomePageState extends State<HomePage> {
 
   List<Food> _filterMenuBySearch(List<Food> menu) {
     if (_searchQuery.isEmpty) return menu;
-    return menu.where((food) => food.name.toLowerCase().contains(_searchQuery.toLowerCase())).toList();
+    final query = _searchQuery.toLowerCase();
+    return menu.where((food) {
+      return food.name.toLowerCase().contains(query) || 
+             food.description.toLowerCase().contains(query);
+    }).toList();
   }
 
   Future<void> _simulateLoading() async {
@@ -94,81 +98,158 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Promo Banners
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: PromoBanner(),
-                  ),
-                  
-                  const SizedBox(height: 20),
-
-                  // Quick Filters
-                  const FilterChipGroup(),
-
-                  const SizedBox(height: 30),
-
-                  // Categories
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
-                    child: Text(
-                      'Categories',
-                      style: AppTextStyles.h2.copyWith(fontSize: 18),
+                  // If searching, show only search results
+                  if (_searchQuery.isNotEmpty) ...[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        'Search Results',
+                        style: AppTextStyles.h2.copyWith(fontSize: 18),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: Category.values.length,
-                      itemBuilder: (context, index) {
-                        final category = Category.values[index];
-                        return CategoryPill(
-                          title: category.toString().split('.').last,
-                          isSelected: _selectedCategory == category,
-                          onTap: () {
-                            setState(() {
-                              _selectedCategory = category;
-                            });
-                          },
-                        );
-                      },
-                    ),
-                  ),
-
-                  const SizedBox(height: 30),
-
-                  // Popular Near You
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Popular Near You',
-                          style: AppTextStyles.h2.copyWith(fontSize: 18),
-                        ),
-                        Text(
-                          'View All',
-                          style: AppTextStyles.bodyS.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.bold,
+                    const SizedBox(height: 16),
+                    if (searchedMenu.isEmpty)
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(32.0),
+                          child: Text(
+                            'No items found matching "$_searchQuery"',
+                            style: AppTextStyles.bodyM.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                            ),
                           ),
                         ),
-                      ],
+                      )
+                    else
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        itemCount: searchedMenu.length,
+                        itemBuilder: (context, index) {
+                          final food = searchedMenu[index];
+                          return FoodTile(
+                            food: food,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FoodDetails(food: food),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                  ] else ...[
+                    // Standard Home Page Layout
+                    
+                    // Promo Banners
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: PromoBanner(),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    height: 280,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
+                    
+                    const SizedBox(height: 20),
+
+                    // Quick Filters
+                    const FilterChipGroup(),
+
+                    const SizedBox(height: 30),
+
+                    // Categories
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Text(
+                        'Categories',
+                        style: AppTextStyles.h2.copyWith(fontSize: 18),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 50,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        itemCount: Category.values.length,
+                        itemBuilder: (context, index) {
+                          final category = Category.values[index];
+                          return CategoryPill(
+                            title: category.toString().split('.').last,
+                            isSelected: _selectedCategory == category,
+                            onTap: () {
+                              setState(() {
+                                _selectedCategory = category;
+                              });
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // Popular Near You
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Popular Near You',
+                            style: AppTextStyles.h2.copyWith(fontSize: 18),
+                          ),
+                          Text(
+                            'View All',
+                            style: AppTextStyles.bodyS.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 280,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        itemCount: restaurant.menu.length > 5 ? 5 : restaurant.menu.length,
+                        itemBuilder: (context, index) {
+                          final food = restaurant.menu[index];
+                          return PremiumFoodCard(
+                            food: food,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => FoodDetails(food: food)),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // Selected Category Items
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        'All ${_selectedCategory.toString().split('.').last}s',
+                        style: AppTextStyles.h2.copyWith(fontSize: 18),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: restaurant.menu.length > 5 ? 5 : restaurant.menu.length,
+                      itemCount: filteredMenu.length,
                       itemBuilder: (context, index) {
-                        final food = restaurant.menu[index];
-                        return PremiumFoodCard(
+                        final food = filteredMenu[index];
+                        return FoodTile(
                           food: food,
                           onTap: () {
                             Navigator.push(
@@ -179,37 +260,7 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                     ),
-                  ),
-
-                  const SizedBox(height: 30),
-
-                  // Selected Category Items
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      'All ${_selectedCategory.toString().split('.').last}s',
-                      style: AppTextStyles.h2.copyWith(fontSize: 18),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: filteredMenu.length,
-                    itemBuilder: (context, index) {
-                      final food = filteredMenu[index];
-                      return FoodTile(
-                        food: food,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => FoodDetails(food: food)),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                  ],
                 ],
               ),
             );

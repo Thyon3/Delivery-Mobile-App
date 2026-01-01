@@ -8,6 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:thydelivery_mobileapp/models/app_user.dart';
 import 'package:thydelivery_mobileapp/models/address.dart';
 import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
+import 'package:thydelivery_mobileapp/services/notifications/notification_service.dart';
+import 'package:thydelivery_mobileapp/models/review.dart';
 
 class Restaurant with ChangeNotifier {
   final List<Food> menu = [
@@ -21,6 +23,22 @@ class Restaurant with ChangeNotifier {
         AddOns(name: 'cheese', price: 3),
         AddOns(name: 'cheese two', price: 3),
         AddOns(name: 'Asnakes french fires', price: 89),
+      ],
+      reviews: [
+        Review(
+          userName: 'Daniel T.',
+          userAvatar: '',
+          rating: 4.8,
+          comment: 'Best burger I have had in a long time! Highly recommended.',
+          date: DateTime.now().subtract(const Duration(days: 2)),
+        ),
+        Review(
+          userName: 'Sarah Jones',
+          userAvatar: '',
+          rating: 4.5,
+          comment: 'Very juicy and flavorous. The cheese is amazing.',
+          date: DateTime.now().subtract(const Duration(days: 5)),
+        ),
       ],
     ),
     Food(
@@ -443,5 +461,48 @@ class Restaurant with ChangeNotifier {
 
   void addUser(String name, String email, String phoneNumber) {
     _users.add(AppUser(name: name, email: email, phoneNumber: phoneNumber));
+  }
+  
+  Future<void> placeOrder() async {
+    // 1. Clear the cart
+    clearCart();
+
+    // 2. Schedule notifications
+    await _scheduleOrderNotifications();
+  }
+
+  Future<void> _scheduleOrderNotifications() async {
+    int notificationId = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+
+    // Order Placed
+    await NotificationService.showNotification(
+      id: notificationId,
+      title: 'Order Placed!',
+      body: 'Your order has been placed successfully.',
+    );
+
+    // Preparing (5 seconds later)
+    await Future.delayed(const Duration(seconds: 5));
+    await NotificationService.showNotification(
+      id: notificationId + 1,
+      title: 'Order Preparing',
+      body: 'The restaurant is preparing your delicious food.',
+    );
+
+    // Out for delivery (10 seconds later)
+    await Future.delayed(const Duration(seconds: 5));
+    await NotificationService.showNotification(
+      id: notificationId + 2,
+      title: 'Out for Delivery',
+      body: 'Your order is on the way!',
+    );
+
+    // Delivered (15 seconds later)
+    await Future.delayed(const Duration(seconds: 5));
+    await NotificationService.showNotification(
+      id: notificationId + 3,
+      title: 'Order Delivered',
+      body: 'Enjoy your meal!',
+    );
   }
 }

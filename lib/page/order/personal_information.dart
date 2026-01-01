@@ -35,6 +35,9 @@ class _PersonalInformationState extends State<PersonalInformation> {
       numberController.text,
     );
 
+    // Place the order
+    context.read<Restaurant>().placeOrder();
+
     // Navigate to Success Page
     Navigator.pushAndRemoveUntil(
       context,

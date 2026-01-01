@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/page/order/deliveryprogress.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
-import 'package:thydelivery_mobileapp/services/notifications/notification_service.dart';
-import 'dart:async';
+
 
 class OrderSuccessPage extends StatefulWidget {
   const OrderSuccessPage({super.key});
@@ -11,39 +10,9 @@ class OrderSuccessPage extends StatefulWidget {
   State<OrderSuccessPage> createState() => _OrderSuccessPageState();
 }
 
+
+
 class _OrderSuccessPageState extends State<OrderSuccessPage> {
-  @override
-  void initState() {
-    super.initState();
-    _triggerOrderNotifications();
-  }
-
-  void _triggerOrderNotifications() {
-    // Immediate notification
-    NotificationService.showNotification(
-      id: 1,
-      title: 'Order Confirmed!',
-      body: 'Your order #THY-78294 has been received.',
-    );
-
-    // Simulated status updates
-    Timer(const Duration(seconds: 10), () {
-      NotificationService.showNotification(
-        id: 2,
-        title: 'Preparing Your Meal',
-        body: 'The chef is working on your delicious order!',
-      );
-    });
-
-    Timer(const Duration(seconds: 25), () {
-      NotificationService.showNotification(
-        id: 3,
-        title: 'Out for Delivery',
-        body: 'Your rider is on the way with your food!',
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

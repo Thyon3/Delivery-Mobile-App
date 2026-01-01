@@ -1,3 +1,5 @@
+import 'package:thydelivery_mobileapp/models/review.dart';
+
 class Food {
   final String name;
   final String description;
@@ -5,6 +7,7 @@ class Food {
   final String imagePath;
   Category category;
   List<AddOns> availableAddOns;
+  List<Review> reviews;
 
   Food({
     required this.name,
@@ -13,6 +16,7 @@ class Food {
     required this.imagePath,
     required this.category,
     required this.availableAddOns,
+    this.reviews = const [],
   });
 }
 

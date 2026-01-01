@@ -97,6 +97,17 @@ This plan outlines the steps to redesign and enhance the Delivery Application to
 - [x] Add real-time order status tracking logic
 - [x] Final Bug Scrub & Performance Optimization
 
+### Phase 10: Advanced Features & Interaction (Commits 161-190+)
+- [ ] Implement a real "Review & Rating" system for food items
+- [ ] Create `Review` model and persistent storage in Firestore
+- [ ] Design and build `ReviewTile` and `AddReviewModal`
+- [ ] Add "Voucher" application logic at checkout
+- [ ] Create `Voucher` model and link to `Restaurant` provider
+- [ ] Implement "Social Sharing" for food items and referral codes
+- [ ] Enhance "Support Chat" with message history and mock responses
+- [ ] Implement "Profile Editing" (Name, Phone, Profile Picture)
+- [ ] Final UI/UX Polish & Accessibility Audit
+
 ## Commit Strategy
 - Every component change gets its own commit.
 - Every page redesign is broken into smaller commits (structure, styling, data binding).
