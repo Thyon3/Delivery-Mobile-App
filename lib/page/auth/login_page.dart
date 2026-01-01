@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thydelivery_mobileapp/components/my_text_field.dart';
 import 'package:thydelivery_mobileapp/components/my_button.dart';
 import 'package:thydelivery_mobileapp/components/social_login_button.dart';
-import 'package:thydelivery_mobileapp/services/auth/auth_service.dart';
 import 'package:thydelivery_mobileapp/theme/app_snackbars.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
+import 'package:thydelivery_mobileapp/providers/auth_provider.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   final void Function() signUp;
   LoginPage({super.key, required this.signUp});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -36,17 +37,15 @@ class _LoginPageState extends State<LoginPage> {
   void signIn(BuildContext context) async {
     if (!validateFields()) return;
 
-    final AuthService authService = AuthService();
+    // Use Riverpod auth provider
+    final success = await ref.read(authProvider.notifier).login(
+      emailController.text,
+      passwordController.text,
+    );
 
-    try {
-      await authService.signInWithEmailPassword(
-        emailController.text,
-        passwordController.text,
-      );
-    } catch (e) {
-      if (mounted) {
-        AppSnackbars.showError(context, e.toString());
-      }
+    if (!success && mounted) {
+      final error = ref.read(authProvider).error;
+      AppSnackbars.showError(context, error ?? 'Login failed');
     }
   }
 

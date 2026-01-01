@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thydelivery_mobileapp/components/my_text_field.dart';
 import 'package:thydelivery_mobileapp/components/my_button.dart';
 import 'package:thydelivery_mobileapp/components/social_login_button.dart';
-import 'package:thydelivery_mobileapp/services/auth/auth_service.dart';
 import 'package:thydelivery_mobileapp/theme/app_snackbars.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
+import 'package:thydelivery_mobileapp/providers/auth_provider.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends ConsumerStatefulWidget {
   final void Function() signIn;
   SignUpPage({super.key, required this.signIn});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  ConsumerState<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends ConsumerState<SignUpPage> {
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
+  String? firstNameError;
+  String? lastNameError;
   String? emailError;
   String? passwordError;
   String? confirmPasswordError;
 
   bool validateFields() {
     setState(() {
+      firstNameError = firstNameController.text.isEmpty ? 'First name required' : null;
+      lastNameError = lastNameController.text.isEmpty ? 'Last name required' : null;
+      
       emailError = emailController.text.isEmpty ? 'Email is required' : null;
       if (emailError == null && !emailController.text.contains('@')) {
         emailError = 'Enter a valid email';
@@ -39,23 +47,26 @@ class _SignUpPageState extends State<SignUpPage> {
       }
     });
 
-    return emailError == null && passwordError == null && confirmPasswordError == null;
+    return firstNameError == null && 
+           lastNameError == null && 
+           emailError == null && 
+           passwordError == null && 
+           confirmPasswordError == null;
   }
 
   void register(BuildContext context) async {
     if (!validateFields()) return;
 
-    final AuthService authService = AuthService();
+    final success = await ref.read(authProvider.notifier).register(
+      emailController.text,
+      passwordController.text,
+      firstNameController.text,
+      lastNameController.text,
+    );
 
-    try {
-      await authService.signUpWithEmailPassword(
-        emailController.text,
-        passwordController.text,
-      );
-    } catch (e) {
-      if (mounted) {
-        AppSnackbars.showError(context, e.toString());
-      }
+    if (!success && mounted) {
+       final error = ref.read(authProvider).error;
+       AppSnackbars.showError(context, error ?? 'Registration failed');
     }
   }
 
@@ -109,6 +120,33 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   const SizedBox(height: 48),
+
+                  // Name fields
+                  Row(
+                    children: [
+                      Expanded(
+                        child: MyTextField(
+                          textEditingController: firstNameController,
+                          hintText: 'First Name',
+                          obscureText: false,
+                          prefixIcon: Icons.person_outline,
+                          errorText: firstNameError,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: MyTextField(
+                          textEditingController: lastNameController,
+                          hintText: 'Last Name',
+                          obscureText: false,
+                          prefixIcon: Icons.person_outline,
+                          errorText: lastNameError,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
 
                   // Email field
                   MyTextField(
