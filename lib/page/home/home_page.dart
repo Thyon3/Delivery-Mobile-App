@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Category _selectedCategory = Category.burger;
-  final bool _isLoading = true;
+  // Removed local _isLoading as we use the one from Restaurant provider
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
 
@@ -45,6 +45,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  List<Food> _filterMenuBySearch(List<Food> menu) {
+    if (_searchQuery.isEmpty) return menu;
+    return menu.where((food) {
+      return food.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+             food.description.toLowerCase().contains(_searchQuery.toLowerCase());
+    }).toList();
+  }
+
   List<Food> _filterMenuByCategory(Category category, List<Food> menu) {
     return menu.where((food) => food.category == category).toList();
   }
@@ -60,10 +68,12 @@ class _HomePageState extends State<HomePage> {
             searchController: _searchController,
           ),
         ],
-        body: _isLoading 
-          ? const HomeSkeleton()
-          : Consumer<Restaurant>(
-              builder: (context, restaurant, child) {
+        body: Consumer<Restaurant>(
+          builder: (context, restaurant, child) {
+            if (restaurant.isLoading) {
+              return const HomeSkeleton();
+            }
+
             final searchedMenu = _filterMenuBySearch(restaurant.menu);
             final filteredMenu = _filterMenuByCategory(_selectedCategory, searchedMenu);
             

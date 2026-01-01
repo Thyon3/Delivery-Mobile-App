@@ -19,7 +19,7 @@ class Food {
   final String? restaurantId;
   final bool isAvailable;
   
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<dynamic> reviews; // Temp fix for UI compatibility
 
   Food({

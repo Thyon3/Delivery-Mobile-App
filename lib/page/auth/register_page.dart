@@ -54,7 +54,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
            confirmPasswordError == null;
   }
 
-  void register(BuildContext context) async {
+  void register() async {
     if (!validateFields()) return;
 
     final success = await ref.read(authProvider.notifier).register(
@@ -183,7 +183,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
                   // Sign up button
                   MyButton(
-                    onTap: () => register(context),
+                    onTap: register,
                     text: 'Create Account',
                   ),
 

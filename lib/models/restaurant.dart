@@ -67,7 +67,7 @@ class Restaurant with ChangeNotifier {
       }
     } catch (e) {
       _error = e.toString();
-      print('Error fetching menu: $_error');
+      debugPrint('Error fetching menu: $_error');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -340,7 +340,7 @@ class Restaurant with ChangeNotifier {
       await _scheduleOrderNotifications();
       
     } catch (e) {
-      print('Order placement failed: $e');
+      debugPrint('Order placement failed: $e');
       rethrow;
     } finally {
       _isLoading = false;

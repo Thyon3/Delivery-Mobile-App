@@ -34,7 +34,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     return emailError == null && passwordError == null;
   }
 
-  void signIn(BuildContext context) async {
+  void signIn() async {
     if (!validateFields()) return;
 
     // Use Riverpod auth provider
@@ -155,7 +155,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                   // Sign in button
                   MyButton(
-                    onTap: () => signIn(context),
+                    onTap: signIn,
                     text: 'Sign In',
                   ),
 
