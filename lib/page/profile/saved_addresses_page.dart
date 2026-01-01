@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/address_tile.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/models/address.dart';
-import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class SavedAddressesPage extends StatefulWidget {
@@ -41,16 +40,22 @@ class _SavedAddressesPageState extends State<SavedAddressesPage> {
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (titleController.text.isNotEmpty && addressController.text.isNotEmpty) {
                 final newAddress = Address(
                   title: titleController.text,
                   address: addressController.text,
                   icon: 'location_on',
                 );
-                Provider.of<Restaurant>(context, listen: false).addAddress(newAddress);
-                FirestoreService().saveAddressToFirestore(newAddress);
-                Navigator.pop(context);
+                
+                // Use provider to save to backend
+                try {
+                  await Provider.of<Restaurant>(context, listen: false).saveAddress(newAddress);
+                  if (context.mounted) Navigator.pop(context);
+                } catch (e) {
+                   // Handle error (optional: show snackbar)
+                   if (context.mounted) Navigator.pop(context); // Dismiss for now
+                }
               }
             },
             child: const Text('Add'),
