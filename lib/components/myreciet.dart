@@ -5,6 +5,7 @@ import 'package:thydelivery_mobileapp/models/restaurant.dart';
 class Myreciet extends StatelessWidget {
   const Myreciet({super.key});
 
+  @override
   Widget build(context) {
     return Padding(
       padding: EdgeInsets.all(25),

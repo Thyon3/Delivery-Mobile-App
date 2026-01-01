@@ -22,6 +22,7 @@ class MyDrawer extends StatelessWidget {
     authService.signOut();
   }
 
+  @override
   Widget build(context) {
     return Drawer(
       child: Column(

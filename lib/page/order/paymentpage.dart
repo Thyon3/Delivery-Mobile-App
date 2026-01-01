@@ -1,8 +1,6 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:thydelivery_mobileapp/components/payment_method_tile.dart';
-import 'package:thydelivery_mobileapp/page/order/deliveryprogress.dart';
-import 'package:thydelivery_mobileapp/page/order/order_success_page.dart';
 import 'package:thydelivery_mobileapp/page/order/personal_information.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 

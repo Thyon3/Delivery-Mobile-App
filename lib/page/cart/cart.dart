@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/components/cart_item_card.dart';
@@ -154,7 +154,7 @@ class _CartState extends State<Cart> {
                             const SizedBox(height: 12),
                             ...userCart.map((cartItem) {
                               return CartItemCard(cartItem: cartItem);
-                            }).toList(),
+                            }),
 
                             const SizedBox(height: 24),
 

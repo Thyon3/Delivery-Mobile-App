@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thydelivery_mobileapp/components/my_text_field.dart';
 import 'package:thydelivery_mobileapp/components/my_button.dart';
@@ -9,7 +9,7 @@ import 'package:thydelivery_mobileapp/providers/auth_provider.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
   final void Function() signIn;
-  SignUpPage({super.key, required this.signIn});
+  const SignUpPage({super.key, required this.signIn});
 
   @override
   ConsumerState<SignUpPage> createState() => _SignUpPageState();

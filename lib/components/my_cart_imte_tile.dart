@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/components/my_quantity_selector.dart';
 import 'package:thydelivery_mobileapp/models/cart_item.dart';
@@ -8,8 +7,9 @@ import 'package:thydelivery_mobileapp/models/restaurant.dart';
 
 class MyCartImteTile extends StatelessWidget {
   final CartItem cartItem;
-  MyCartImteTile({super.key, required this.cartItem});
+  const MyCartImteTile({super.key, required this.cartItem});
 
+  @override
   Widget build(BuildContext context) {
     return Consumer<Restaurant>(
       builder:
@@ -56,7 +56,7 @@ class MyCartImteTile extends StatelessWidget {
                 ),
                 // adds on
                 SizedBox(
-                  height: cartItem.addOns.length == 0 ? 0 : 60,
+                  height: cartItem.addOns.isEmpty ? 0 : 60,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),

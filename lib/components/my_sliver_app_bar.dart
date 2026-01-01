@@ -5,7 +5,8 @@ class MySliverAppBar extends StatelessWidget {
   final Widget title;
   final Widget child;
 
-  MySliverAppBar({super.key, required this.title, required this.child});
+  const MySliverAppBar({super.key, required this.title, required this.child});
+  @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       expandedHeight: 350,

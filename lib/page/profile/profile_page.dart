@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/profile_menu_item.dart';
 import 'package:thydelivery_mobileapp/page/profile/favorites_page.dart';
 import 'package:thydelivery_mobileapp/page/profile/help_center_page.dart';
@@ -6,7 +6,6 @@ import 'package:thydelivery_mobileapp/page/profile/notifications_page.dart';
 import 'package:thydelivery_mobileapp/page/profile/referral_page.dart';
 import 'package:thydelivery_mobileapp/page/order/orders_page.dart';
 import 'package:thydelivery_mobileapp/page/profile/saved_addresses_page.dart';
-import 'package:thydelivery_mobileapp/page/profile/support_chat_page.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
 class ProfilePage extends StatelessWidget {

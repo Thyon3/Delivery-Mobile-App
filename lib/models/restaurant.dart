@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:thydelivery_mobileapp/components/my_cart_imte_tile.dart';
 import 'package:thydelivery_mobileapp/models/cart_item.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:collection/collection.dart';
@@ -9,7 +7,6 @@ import 'package:thydelivery_mobileapp/models/app_user.dart';
 import 'package:thydelivery_mobileapp/models/address.dart';
 import 'package:thydelivery_mobileapp/services/database/firestore_service.dart';
 import 'package:thydelivery_mobileapp/services/notifications/notification_service.dart';
-import 'package:thydelivery_mobileapp/models/review.dart';
 import 'package:thydelivery_mobileapp/services/api/api_client.dart';
 import 'package:thydelivery_mobileapp/services/api/restaurant_api.dart';
 import 'package:thydelivery_mobileapp/services/api/order_api.dart';
@@ -178,7 +175,7 @@ class Restaurant with ChangeNotifier {
   void addToCart(Food food, List<AddOns> availabaleAddOns) {
     //check if the item we are adding is already exist on the cart
 
-    CartItem? _cartItem = _cart.firstWhereOrNull((item) {
+    CartItem? cartItem = _cart.firstWhereOrNull((item) {
       //check if the food items we are passing are the same with any the ones in the cart
 
       final bool isTheSameFood = item.food == food;
@@ -193,8 +190,8 @@ class Restaurant with ChangeNotifier {
 
     //if the cart item alrady exist we only have to increase the quantity of the item
 
-    if (_cartItem != null) {
-      _cartItem.quantity++;
+    if (cartItem != null) {
+      cartItem.quantity++;
     } else {
       _cart.add(CartItem(food: food, addOns: availabaleAddOns));
     }
@@ -204,11 +201,11 @@ class Restaurant with ChangeNotifier {
 
   //remove from cart
 
-  void removeFromCart(CartItem _cartItem) {
-    final int cartIndex = _cart.indexOf(_cartItem);
+  void removeFromCart(CartItem cartItem) {
+    final int cartIndex = _cart.indexOf(cartItem);
     if (cartIndex > -1) {
-      if (_cartItem.quantity > 1) {
-        _cartItem.quantity--;
+      if (cartItem.quantity > 1) {
+        cartItem.quantity--;
       } else {
         _cart.removeAt(cartIndex);
       }
@@ -299,7 +296,7 @@ class Restaurant with ChangeNotifier {
   }
 
   //  create a list of users
-  List<AppUser> _users = [];
+  final List<AppUser> _users = [];
 
   // have a function to add a new user
 

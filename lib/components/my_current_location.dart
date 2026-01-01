@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
 
 class MyCurrentLocation extends StatelessWidget {
   TextEditingController controller = TextEditingController();
+
+  MyCurrentLocation({super.key});
   void openLocationSearchBox(BuildContext context) {
     showDialog(
       context: context,

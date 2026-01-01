@@ -6,8 +6,7 @@ ThemeData darkMode = ThemeData(
     primary: const Color(0xFFFF7043), // Same accent color
     secondary: const Color(0xFF2C2C2C), // Deep grey
     tertiary: const Color(0xFF3D3D3D), // Medium grey
-    surface: const Color(0xFF1E1E1E), // Near black
-    background: const Color(0xFF121212), // Deep black
+    surface: const Color(0xFF1E1E1E), // Deep black
     onPrimary: Colors.white,
     onSecondary: Colors.white,
     onSurface: Colors.white,

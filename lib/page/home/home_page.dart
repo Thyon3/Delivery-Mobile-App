@@ -1,12 +1,8 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:thydelivery_mobileapp/components/my_description_box.dart';
-import 'package:thydelivery_mobileapp/components/my_sliver_app_bar.dart';
-import 'package:thydelivery_mobileapp/components/my_tab_bar.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
 import 'package:thydelivery_mobileapp/components/my_drawer.dart';
-import 'package:thydelivery_mobileapp/components/my_current_location.dart';
 import 'package:thydelivery_mobileapp/components/food_tile.dart';
 import 'package:thydelivery_mobileapp/components/home_skeleton.dart';
 import 'package:thydelivery_mobileapp/page/food/food_details.dart';
@@ -27,7 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Category _selectedCategory = Category.burger;
-  bool _isLoading = true;
+  final bool _isLoading = true;
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
 

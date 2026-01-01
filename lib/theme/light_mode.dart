@@ -7,7 +7,6 @@ ThemeData lightMode = ThemeData(
     secondary: const Color(0xFFFFAB91), // Lighter Coral
     tertiary: Colors.white,
     surface: Colors.grey.shade100,
-    background: Colors.white,
     onPrimary: Colors.white,
     onSecondary: Colors.black,
     onSurface: Colors.grey.shade800,

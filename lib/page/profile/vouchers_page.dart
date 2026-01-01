@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:thydelivery_mobileapp/components/voucher_card.dart';
 import 'package:thydelivery_mobileapp/theme/app_text_styles.dart';
 
@@ -7,7 +7,7 @@ class VouchersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> _vouchers = [
+    final List<Map<String, dynamic>> vouchers = [
       {
         'title': 'Welcome Discount',
         'discount': '\$10 OFF',
@@ -52,7 +52,7 @@ class VouchersPage extends StatelessWidget {
               style: AppTextStyles.h3.copyWith(fontSize: 18),
             ),
             const SizedBox(height: 16),
-            ..._vouchers.map((item) {
+            ...vouchers.map((item) {
               return VoucherCard(
                 title: item['title'],
                 discount: item['discount'],

@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thydelivery_mobileapp/models/food.dart';
 import 'package:thydelivery_mobileapp/models/restaurant.dart';
@@ -304,7 +304,7 @@ class _FoodDetailsState extends State<FoodDetails> with SingleTickerProviderStat
                                 });
                               },
                             );
-                          }).toList(),
+                          }),
                           const SizedBox(height: 24),
                         ],
 
